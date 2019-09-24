@@ -23,7 +23,7 @@ body {
 .avatar {
     width: 10em;
     height: 10em;
-    background-image: url(/css/images/avatar.jpg);
+    background-image: url(./images/avatar.jpg);
     background-size: contain;
     border-radius: 50%;
     border-width: 0.25em;
