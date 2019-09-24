@@ -1,0 +1,69 @@
+body {
+    font-family: 'Roboto Mono', monospace;
+    margin: 0;
+    color: white;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+}
+
+.container__bg-dark {
+    background-color: rgba(17, 15, 15, 0.8);
+}
+
+.container__flex-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar {
+    width: 10em;
+    height: 10em;
+    background-image: url(/images/avatar.jpg);
+    background-size: contain;
+    border-radius: 50%;
+    border-width: 0.25em;
+    border-style: solid;
+    border-color: white;
+    margin-bottom: .25em;
+    overflow: hidden;
+}
+
+.avatar:hover {
+    border-color: #DDD;
+}
+
+.text--hover {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    color: transparent;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.text--hover .text-item--hover{
+    text-decoration: none;
+    color: transparent;
+}
+
+.text--hover:hover .text-item--hover{
+    transition: 0.3s linear;
+    height: 20%;
+    width: 100%;
+    color: white;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.text {
+    text-align: center;
+}
+
+.text-description {
+    color: rgb(119, 119, 119);
+}

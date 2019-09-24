@@ -1,2 +1,3 @@
 # duynguyen
-Portfolio
+## Something about me
+- Visit my blog to know more.
