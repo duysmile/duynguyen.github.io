@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/duynguyen.github.io/static/css/main.b0e1f8ad.chunk.css",
-    "main.js": "/duynguyen.github.io/static/js/main.74c2005f.chunk.js",
-    "main.js.map": "/duynguyen.github.io/static/js/main.74c2005f.chunk.js.map",
+    "main.css": "/duynguyen.github.io/static/css/main.128efecb.chunk.css",
+    "main.js": "/duynguyen.github.io/static/js/main.025e1b80.chunk.js",
+    "main.js.map": "/duynguyen.github.io/static/js/main.025e1b80.chunk.js.map",
     "runtime~main.js": "/duynguyen.github.io/static/js/runtime~main.f9a323cd.js",
     "runtime~main.js.map": "/duynguyen.github.io/static/js/runtime~main.f9a323cd.js.map",
     "static/css/2.0624914a.chunk.css": "/duynguyen.github.io/static/css/2.0624914a.chunk.css",
-    "static/js/2.49bcf093.chunk.js": "/duynguyen.github.io/static/js/2.49bcf093.chunk.js",
-    "static/js/2.49bcf093.chunk.js.map": "/duynguyen.github.io/static/js/2.49bcf093.chunk.js.map",
+    "static/js/2.12a86476.chunk.js": "/duynguyen.github.io/static/js/2.12a86476.chunk.js",
+    "static/js/2.12a86476.chunk.js.map": "/duynguyen.github.io/static/js/2.12a86476.chunk.js.map",
     "index.html": "/duynguyen.github.io/index.html",
-    "precache-manifest.da18b781d2e623053b550583c8bf4c3c.js": "/duynguyen.github.io/precache-manifest.da18b781d2e623053b550583c8bf4c3c.js",
+    "precache-manifest.c3f8921fee18388dc0538e82dc300338.js": "/duynguyen.github.io/precache-manifest.c3f8921fee18388dc0538e82dc300338.js",
     "service-worker.js": "/duynguyen.github.io/service-worker.js",
     "static/css/2.0624914a.chunk.css.map": "/duynguyen.github.io/static/css/2.0624914a.chunk.css.map",
-    "static/css/main.b0e1f8ad.chunk.css.map": "/duynguyen.github.io/static/css/main.b0e1f8ad.chunk.css.map",
-    "static/media/blog.css": "/duynguyen.github.io/static/media/avatar.83cfa06d.jpg"
+    "static/css/main.128efecb.chunk.css.map": "/duynguyen.github.io/static/css/main.128efecb.chunk.css.map",
+    "static/media/home.css": "/duynguyen.github.io/static/media/duy_nguyen.3fe8df87.jpg"
   }
 }
