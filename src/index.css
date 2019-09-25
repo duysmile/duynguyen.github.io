@@ -1,0 +1,49 @@
+body {
+  font-family: 'Roboto Mono', monospace;
+  margin: 0;
+  color: white;
+}
+
+.custom-container {
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+.custom-container__bg-dark {
+  background-color: rgba(17, 15, 15, 0.8);
+}
+
+.custom-container__bg-raisin-black {
+  background-color: rgba(34, 34, 34, 0.8);
+}
+
+.custom-container__flex-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.color-black-coral {
+  color: #555B6E;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 0.75rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #e7e7e7; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(155, 153, 153); 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(71, 66, 66); 
+}

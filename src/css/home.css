@@ -1,29 +1,7 @@
-body {
-    font-family: 'Roboto Mono', monospace;
-    margin: 0;
-    color: white;
-}
-
-.container {
-    width: 100vw;
-    height: 100vh;
-}
-
-.container__bg-dark {
-    background-color: rgba(17, 15, 15, 0.8);
-}
-
-.container__flex-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
 .avatar {
     width: 10em;
     height: 10em;
-    background-image: url(./images/avatar.jpg);
+    /* background-image: url(./images/avatar.jpg); */
     background-size: contain;
     border-radius: 50%;
     border-width: 0.25em;
@@ -48,20 +26,25 @@ body {
 
 .text--hover .text-item--hover{
     text-decoration: none;
-    color: transparent;
-}
-
-.text--hover:hover .text-item--hover{
     transition: 0.3s linear;
-    height: 20%;
+    height: 24%;
     width: 100%;
     color: white;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.2);
+    transform: translate(0, 60%);
+    padding-top: 0.25rem;
+    opacity: 0;
+}
+
+.text--hover:hover .text-item--hover{
+    transform: translate(0, 0);
+    opacity: 1;
 }
 
 .text {
     text-align: center;
+    padding-top: 1em;
 }
 
 .text-description {
