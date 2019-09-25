@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import marked from 'marked';
+import { Base64 } from 'js-base64';
 
 import '../css/content.css';
 
@@ -24,8 +25,7 @@ export default class BlogDetail extends React.Component {
         try {
             const id = this.props.match.params.id;
             const contentBlogData = await this.getBlogContent(id);
-            const contentBlog = atob(contentBlogData.data.content);
-            console.log(contentBlog);
+            const contentBlog = Base64.decode(contentBlogData.data.content);
             this.setState({
                 content: contentBlog
             });

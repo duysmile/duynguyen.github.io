@@ -17,7 +17,6 @@ export default class Blog extends React.Component {
     async componentDidMount() {
         try {
             const dataBlog = await this.getListBlog(1, perPage);
-            console.log(dataBlog);
             const blogs = dataBlog.data.map(blog => {
                 const info = blog.name.split('.');
                 const name = info[0].split('_').join(' ');
