@@ -29,8 +29,8 @@
     height: 8.5rem;
     margin-bottom: 1rem;
     border-radius: 50%;
-    background-image: url(./images/avatar.jpg);
-    background-size: contain;
+    background-image: url(./images/pain.jpg);
+    background-size: cover;
 }
 
 .about-me .author {
@@ -74,4 +74,15 @@
 
 .item-blog .title-article .link-article:hover{
     text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    .about-me {
+        grid-column: 5;
+    }
+    .list-blog {
+        grid-column: 5;
+        background-color: rgba(34, 34, 34, 0.8);
+        min-height: 500px;
+    }
 }

@@ -7,9 +7,10 @@
 }
 
 .blog-content .box-content {
-    background-color: #C8C8C8;
+    background-color: rgb(216, 216, 216);
     width: 50%;
     padding: 1rem;
+    color: rgb(56, 56, 56);
 }
 
 .blog-content h1 {
@@ -26,4 +27,39 @@
 
 .blog-content h4 {
     font-size: 1.25rem;
+}
+
+.button-back {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+    color: white;
+}
+
+.link-back {
+    color: white;
+}
+
+.link-back:hover {
+    color: rgb(214, 214, 214);
+}
+
+@media (max-width: 480px) {
+    .blog-content .box-content {
+        width: 100%;
+        background-color: white;
+        padding-top: 4rem;
+    }
+    .button-back {
+        position: fixed;
+        border-color: rgb(104, 104, 104);
+        color: rgb(104, 104, 104);
+    }
 }
