@@ -12,14 +12,28 @@ export default class Blog extends React.Component {
         this.state = {
             blogs: []
         };
-
-        this.getListBlog = this.getListBlog.bind(this);
     }
 
     async componentDidMount() {
         try {
             const dataBlog = await this.getListBlog(1, perPage);
             console.log(dataBlog);
+            const blogs = dataBlog.data.map(blog => {
+                const info = blog.name.split('.');
+                const name = info[0].split('_').join(' ');
+                const time = info[1].replace(/_/g, '-');
+                const tags = info[2] && info[2].split('_').join(', ');
+                return {
+                    name,
+                    time: time || '',
+                    tags: tags || '',
+                    id: blog.sha
+                };
+            });
+
+            this.setState({
+                blogs
+            });
         } catch (error) {
             console.error('ERROR', error);
         }
@@ -27,13 +41,26 @@ export default class Blog extends React.Component {
 
     getListBlog(page, perPage) {
         const apiGitHub = 'https://api.github.com';
-        const page = 1;
-        const perPage = 10;
         const pathGitHubApi = `${apiGitHub}/repos/orangetwentyfour/duynguyen.github.io/contents/blogs?page=${page}&per_page=${perPage}`;
         return axios.get(pathGitHubApi);
     }
 
     render() {
+        const blogs = this.state.blogs;
+        const blogElements = blogs.map((blog, index) => {
+            return (
+                <div className="item-blog" key={index}>
+                    <div>
+                        <span className="time">{blog.time}</span>
+                        <span className="tag">{blog.tags}</span>
+                    </div>
+                    <div className="title-article">
+                        <Link className="link-article" to={`/blog/${blog.id}`}>{blog.name}</Link>
+                    </div>
+                </div>
+            );
+        });
+
         return (
             <div className="custom-container custom-container__bg-raisin-black">
                 <div className="box-blog">
@@ -48,205 +75,7 @@ export default class Blog extends React.Component {
                         </div>
                     </div>
                     <div className="list-blog">
-                        <div className="item-blog">
-                            <div>
-                                <span className="time">24-09-2019</span>
-                                <span className="tag">nodejs, javascript</span>
-                            </div>
-                            <div className="title-article">
-                                <Link className="link-article" to={'/blog'}>Event loop Nodejs</Link>
-                            </div>
-                        </div>
-                        <div className="item-blog">
-                            <div>
-                                <span className="time">24-09-2019</span>
-                                <span className="tag">nodejs, javascript</span>
-                            </div>
-                            <div className="title-article">
-                                <Link className="link-article" to={'/blog'}>Event loop Nodejs</Link>
-                            </div>
-                        </div>
-                        <div className="item-blog">
-                            <div>
-                                <span className="time">24-09-2019</span>
-                                <span className="tag">nodejs, javascript</span>
-                            </div>
-                            <div className="title-article">
-                                <Link className="link-article" to={'/blog'}>Event loop Nodejs</Link>
-                            </div>
-                        </div>
-                        <div className="item-blog">
-                            <div>
-                                <span className="time">24-09-2019</span>
-                                <span className="tag">nodejs, javascript</span>
-                            </div>
-                            <div className="title-article">
-                                <Link className="link-article" to={'/blog'}>Event loop Nodejs</Link>
-                            </div>
-                        </div>
-                        <div className="item-blog">
-                            <div>
-                                <span className="time">24-09-2019</span>
-                                <span className="tag">nodejs, javascript</span>
-                            </div>
-                            <div className="title-article">
-                                <Link className="link-article" to={'/blog'}>Event loop Nodejs</Link>
-                            </div>
-                        </div>
-                        <div className="item-blog">
-                            <div>
-                                <span className="time">24-09-2019</span>
-                                <span className="tag">nodejs, javascript</span>
-                            </div>
-                            <div className="title-article">
-                                <Link className="link-article" to={'/blog'}>Event loop Nodejs</Link>
-                            </div>
-                        </div>
-                        <div className="item-blog">
-                            <div>
-                                <span className="time">24-09-2019</span>
-                                <span className="tag">nodejs, javascript</span>
-                            </div>
-                            <div className="title-article">
-                                <Link className="link-article" to={'/blog'}>Event loop Nodejs</Link>
-                            </div>
-                        </div>
-                        <div className="item-blog">
-                            <div>
-                                <span className="time">24-09-2019</span>
-                                <span className="tag">nodejs, javascript</span>
-                            </div>
-                            <div className="title-article">
-                                <Link className="link-article" to={'/blog'}>Event loop Nodejs</Link>
-                            </div>
-                        </div>
-                        <div className="item-blog">
-                            <div>
-                                <span className="time">24-09-2019</span>
-                                <span className="tag">nodejs, javascript</span>
-                            </div>
-                            <div className="title-article">
-                                <Link className="link-article" to={'/blog'}>Event loop Nodejs</Link>
-                            </div>
-                        </div>
-                        <div className="item-blog">
-                            <div>
-                                <span className="time">24-09-2019</span>
-                                <span className="tag">nodejs, javascript</span>
-                            </div>
-                            <div className="title-article">
-                                <Link className="link-article" to={'/blog'}>Event loop Nodejs</Link>
-                            </div>
-                        </div>
-                        <div className="item-blog">
-                            <div>
-                                <span className="time">24-09-2019</span>
-                                <span className="tag">nodejs, javascript</span>
-                            </div>
-                            <div className="title-article">
-                                <Link className="link-article" to={'/blog'}>Event loop Nodejs</Link>
-                            </div>
-                        </div>
-                        <div className="item-blog">
-                            <div>
-                                <span className="time">24-09-2019</span>
-                                <span className="tag">nodejs, javascript</span>
-                            </div>
-                            <div className="title-article">
-                                <Link className="link-article" to={'/blog'}>Event loop Nodejs</Link>
-                            </div>
-                        </div>
-                        <div className="item-blog">
-                            <div>
-                                <span className="time">24-09-2019</span>
-                                <span className="tag">nodejs, javascript</span>
-                            </div>
-                            <div className="title-article">
-                                <Link className="link-article" to={'/blog'}>Event loop Nodejs</Link>
-                            </div>
-                        </div>
-                        <div className="item-blog">
-                            <div>
-                                <span className="time">24-09-2019</span>
-                                <span className="tag">nodejs, javascript</span>
-                            </div>
-                            <div className="title-article">
-                                <Link className="link-article" to={'/blog'}>Event loop Nodejs</Link>
-                            </div>
-                        </div>
-                        <div className="item-blog">
-                            <div>
-                                <span className="time">24-09-2019</span>
-                                <span className="tag">nodejs, javascript</span>
-                            </div>
-                            <div className="title-article">
-                                <Link className="link-article" to={'/blog'}>Event loop Nodejs</Link>
-                            </div>
-                        </div>
-                        <div className="item-blog">
-                            <div>
-                                <span className="time">24-09-2019</span>
-                                <span className="tag">nodejs, javascript</span>
-                            </div>
-                            <div className="title-article">
-                                <Link className="link-article" to={'/blog'}>Event loop Nodejs</Link>
-                            </div>
-                        </div>
-                        <div className="item-blog">
-                            <div>
-                                <span className="time">24-09-2019</span>
-                                <span className="tag">nodejs, javascript</span>
-                            </div>
-                            <div className="title-article">
-                                <Link className="link-article" to={'/blog'}>Event loop Nodejs</Link>
-                            </div>
-                        </div>
-                        <div className="item-blog">
-                            <div>
-                                <span className="time">24-09-2019</span>
-                                <span className="tag">nodejs, javascript</span>
-                            </div>
-                            <div className="title-article">
-                                <Link className="link-article" to={'/blog'}>Event loop Nodejs</Link>
-                            </div>
-                        </div>
-                        <div className="item-blog">
-                            <div>
-                                <span className="time">24-09-2019</span>
-                                <span className="tag">nodejs, javascript</span>
-                            </div>
-                            <div className="title-article">
-                                <Link className="link-article" to={'/blog'}>Event loop Nodejs</Link>
-                            </div>
-                        </div>
-                        <div className="item-blog">
-                            <div>
-                                <span className="time">24-09-2019</span>
-                                <span className="tag">nodejs, javascript</span>
-                            </div>
-                            <div className="title-article">
-                                <Link className="link-article" to={'/blog'}>Event loop Nodejs</Link>
-                            </div>
-                        </div>
-                        <div className="item-blog">
-                            <div>
-                                <span className="time">24-09-2019</span>
-                                <span className="tag">nodejs, javascript</span>
-                            </div>
-                            <div className="title-article">
-                                <Link className="link-article" to={'/blog'}>Event loop Nodejs</Link>
-                            </div>
-                        </div>
-                        <div className="item-blog">
-                            <div>
-                                <span className="time">24-09-2019</span>
-                                <span className="tag">nodejs, javascript</span>
-                            </div>
-                            <div className="title-article">
-                                <Link className="link-article" to={'/blog'}>Event loop Nodejs</Link>
-                            </div>
-                        </div>
-
+                        { blogElements }
                     </div>
                 </div>
             </div>

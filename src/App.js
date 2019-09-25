@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Blog from './pages/Blog';
+import BlogDetail from './pages/BlogDetail';
 
 function About() {
   return <h2>About</h2>;
@@ -14,7 +15,8 @@ function App() {
       <div>
         <Route path="/" exact component={Home} />
         <Route path="/about" component={About} />
-        <Route path="/blog" component={Blog} />
+        <Route exact path="/blog" component={Blog} />
+        <Route path="/blog/:id" component={BlogDetail} />
       </div>
     </Router>
   );
