@@ -29,6 +29,8 @@
     height: 8.5rem;
     margin-bottom: 1rem;
     border-radius: 50%;
+    background-image: url(./images/avatar.jpg);
+    background-size: contain;
 }
 
 .about-me .author {
