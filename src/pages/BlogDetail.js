@@ -36,7 +36,7 @@ export default class BlogDetail extends React.Component {
 
     getBlogContent(id) {
         const apiGitHub = 'https://api.github.com';
-        const pathGitHubApi = `${apiGitHub}/repos/orangetwentyfour/duynguyen.github.io/git/blobs/${id}`;
+        const pathGitHubApi = `${apiGitHub}/repos/orangetwentyfour/blogs-github/git/blobs/${id}`;
         return axios.get(pathGitHubApi);
     }
 

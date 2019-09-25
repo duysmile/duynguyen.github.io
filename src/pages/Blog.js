@@ -40,7 +40,7 @@ export default class Blog extends React.Component {
 
     getListBlog(page, perPage) {
         const apiGitHub = 'https://api.github.com';
-        const pathGitHubApi = `${apiGitHub}/repos/orangetwentyfour/duynguyen.github.io/contents/blogs?ref=master&page=${page}&per_page=${perPage}`;
+        const pathGitHubApi = `${apiGitHub}/repos/orangetwentyfour/blogs-github/contents/blogs?ref=master&page=${page}&per_page=${perPage}`;
         return axios.get(pathGitHubApi);
     }
 
