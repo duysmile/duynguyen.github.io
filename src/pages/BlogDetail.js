@@ -50,9 +50,7 @@ export default class BlogDetail extends React.Component {
                 <Link className="link-back button-back" to={`/blog`}>
                     <FontAwesomeIcon icon={faLongArrowAltLeft} />
                 </Link>
-                <div className="box-content" dangerouslySetInnerHTML={{ __html: markdownText }}>
-
-                </div>
+                <div className="box-content" dangerouslySetInnerHTML={{ __html: markdownText }}></div>
             </div>
         )
     }

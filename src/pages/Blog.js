@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import { Link } from "react-router-dom";
 
+import ItemBlog from '../components/item-blog/ItemBlog';
 import '../css/blog.css';
 
 const perPage = 10;
@@ -48,15 +48,10 @@ export default class Blog extends React.Component {
         const blogs = this.state.blogs;
         const blogElements = blogs.map((blog, index) => {
             return (
-                <div className="item-blog" key={index}>
-                    <div>
-                        <span className="time">{blog.time}</span>
-                        <span className="tag">{blog.tags}</span>
-                    </div>
-                    <div className="title-article">
-                        <Link className="link-article" to={`/blog/${blog.id}`}>{blog.name}</Link>
-                    </div>
-                </div>
+                <ItemBlog 
+                    key={index} 
+                    item={blog}
+                />
             );
         });
 
