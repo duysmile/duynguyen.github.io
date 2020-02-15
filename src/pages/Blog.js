@@ -14,7 +14,7 @@ export default class Blog extends React.Component {
 
     getListBlog(dispatch, page, perPage) {
         const apiGitHub = 'https://api.github.com';
-        const pathGitHubApi = `${apiGitHub}/repos/orangetwentyfour/blogs-github/contents/blogs?ref=master&page=${page}&per_page=${perPage}`;
+        const pathGitHubApi = `${apiGitHub}/repos/duysmile/blogs-github/contents/blogs?ref=master&page=${page}&per_page=${perPage}`;
         return axios.get(pathGitHubApi).then(
             response => dispatch(this.props.getBlogs(response.data)),
             err => console.error(err)
@@ -49,7 +49,7 @@ export default class Blog extends React.Component {
                 <div className="box-blog">
                     <div className="about-me color-black-coral">
                         <div className="logo"></div>
-                        <h1 className="title">Torf Blog</h1>
+                        <h1 className="title">Duysmile Blog</h1>
                         <div className="author">
                             By Duy Nguyen
                         </div>
