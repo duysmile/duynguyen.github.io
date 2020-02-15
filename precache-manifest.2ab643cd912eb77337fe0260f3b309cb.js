@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c28de5bfe7f2bc782adb0cc05cc923ff",
+    "revision": "c392b39510a51a5258cd76a9571283f0",
     "url": "/duynguyen.github.io/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/duynguyen.github.io/static/css/2.0624914a.chunk.css"
   },
   {
-    "revision": "189e33a14d80645d1d68",
+    "revision": "2b611febb5b24578e876",
     "url": "/duynguyen.github.io/static/css/main.128efecb.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/duynguyen.github.io/static/js/2.1ce88081.chunk.js"
   },
   {
-    "revision": "189e33a14d80645d1d68",
-    "url": "/duynguyen.github.io/static/js/main.a9fd01ef.chunk.js"
+    "revision": "2b611febb5b24578e876",
+    "url": "/duynguyen.github.io/static/js/main.7a881212.chunk.js"
   },
   {
     "revision": "2099df62cd2b02cdd7b1",
