@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c392b39510a51a5258cd76a9571283f0",
+    "revision": "36677358dbc84aacf8eff8cace8b3386",
     "url": "/duynguyen.github.io/index.html"
   },
   {
-    "revision": "0d41e05b907021048c71",
+    "revision": "cee79ecf462ff6e6784f",
     "url": "/duynguyen.github.io/static/css/2.0624914a.chunk.css"
   },
   {
-    "revision": "2b611febb5b24578e876",
+    "revision": "f4a20d2a6f6f47f0bf04",
     "url": "/duynguyen.github.io/static/css/main.128efecb.chunk.css"
   },
   {
-    "revision": "0d41e05b907021048c71",
-    "url": "/duynguyen.github.io/static/js/2.1ce88081.chunk.js"
+    "revision": "cee79ecf462ff6e6784f",
+    "url": "/duynguyen.github.io/static/js/2.7b3cfc2c.chunk.js"
   },
   {
-    "revision": "2b611febb5b24578e876",
-    "url": "/duynguyen.github.io/static/js/main.7a881212.chunk.js"
+    "revision": "f4a20d2a6f6f47f0bf04",
+    "url": "/duynguyen.github.io/static/js/main.65e0e678.chunk.js"
   },
   {
     "revision": "2099df62cd2b02cdd7b1",
