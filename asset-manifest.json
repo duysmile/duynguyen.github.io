@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/duynguyen.github.io/static/css/main.128efecb.chunk.css",
+    "main.css": "/duynguyen.github.io/static/css/main.5237fd73.chunk.css",
     "main.js": "/duynguyen.github.io/static/js/main.65e0e678.chunk.js",
     "main.js.map": "/duynguyen.github.io/static/js/main.65e0e678.chunk.js.map",
     "runtime~main.js": "/duynguyen.github.io/static/js/runtime~main.f9a323cd.js",
@@ -9,10 +9,10 @@
     "static/js/2.7b3cfc2c.chunk.js": "/duynguyen.github.io/static/js/2.7b3cfc2c.chunk.js",
     "static/js/2.7b3cfc2c.chunk.js.map": "/duynguyen.github.io/static/js/2.7b3cfc2c.chunk.js.map",
     "index.html": "/duynguyen.github.io/index.html",
-    "precache-manifest.cffc7a38fea77ef3b6c4cb6b5164b62a.js": "/duynguyen.github.io/precache-manifest.cffc7a38fea77ef3b6c4cb6b5164b62a.js",
+    "precache-manifest.6586866804387023c5af0f6727024bc5.js": "/duynguyen.github.io/precache-manifest.6586866804387023c5af0f6727024bc5.js",
     "service-worker.js": "/duynguyen.github.io/service-worker.js",
     "static/css/2.0624914a.chunk.css.map": "/duynguyen.github.io/static/css/2.0624914a.chunk.css.map",
-    "static/css/main.128efecb.chunk.css.map": "/duynguyen.github.io/static/css/main.128efecb.chunk.css.map",
+    "static/css/main.5237fd73.chunk.css.map": "/duynguyen.github.io/static/css/main.5237fd73.chunk.css.map",
     "static/media/home.css": "/duynguyen.github.io/static/media/duy_nguyen.3fe8df87.jpg"
   }
 }
