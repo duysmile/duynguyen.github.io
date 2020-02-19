@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import parse from 'date-fns/parse';
 
 import ItemBlog from '../components/item-blog/ItemBlog';
 import '../css/blog.css';
@@ -28,14 +29,24 @@ export default class Blog extends React.Component {
             const name = info[0].split('_').join(' ');
             const time = info[1].replace(/_/g, '-');
             const tags = info[2] && info[2].split('_').join(', ');
+
+            const dateArr = info[1].split('_');
+            const datetime = new Date(dateArr[2], dateArr[1] - 1, dateArr[0]);
+
             return {
                 name,
+                datetime,
                 time: time || '',
                 tags: tags || '',
                 id: blog.sha
             };
         });
-        const blogElements = blogs.map((blog, index) => {
+
+        const sortedBlogs = [...blogs].sort((b1, b2) => {
+            return b1.datetime.valueOf() > b2.datetime.valueOf() ? -1 : 1;
+        });
+
+        const blogElements = sortedBlogs.map((blog, index) => {
             return (
                 <ItemBlog
                     key={index}

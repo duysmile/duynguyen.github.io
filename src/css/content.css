@@ -51,6 +51,10 @@
     color: rgb(214, 214, 214);
 }
 
+img {
+    max-width: 100%;
+}
+
 @media (max-width: 480px) {
     .blog-content .box-content {
         width: 100%;

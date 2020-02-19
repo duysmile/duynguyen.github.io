@@ -20,7 +20,6 @@ function convertBlog(blog) {
     if (!blog || !blog.content) {
         return '';
     }
-    console.log(blog);
     const contentBlog = Base64.decode(blog.content);
     return contentBlog;
 }
