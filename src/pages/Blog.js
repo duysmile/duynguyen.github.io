@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import parse from 'date-fns/parse';
 
 import ItemBlog from '../components/item-blog/ItemBlog';
 import '../css/blog.css';
