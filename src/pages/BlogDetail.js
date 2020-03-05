@@ -7,6 +7,7 @@ import { Base64 } from 'js-base64';
 import { Link } from "react-router-dom";
 
 import '../css/content.css';
+import Loading from '../components/layouts/Loading';
 
 marked.setOptions({
     breaks: true,
@@ -33,6 +34,7 @@ export default class BlogDetail extends React.Component {
     getBlogContent(dispatch, id) {
         const apiGitHub = 'https://api.github.com';
         const pathGitHubApi = `${apiGitHub}/repos/orangetwentyfour/blogs-github/git/blobs/${id}`;
+        this.props.fetching();
         return axios.get(pathGitHubApi).then(
             response => dispatch(this.props.getBlog(response.data)),
             err => console.error(err)
@@ -47,6 +49,7 @@ export default class BlogDetail extends React.Component {
                 <Link className="link-back button-back" to={`/blog`}>
                     <FontAwesomeIcon icon={faLongArrowAltLeft} />
                 </Link>
+                {this.props.isFetching && <Loading />}
                 <div className="box-content" dangerouslySetInnerHTML={{ __html: markdownText }}></div>
             </div>
         );

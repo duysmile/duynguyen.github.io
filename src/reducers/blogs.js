@@ -1,8 +1,9 @@
-import { GET_BLOGS, GET_BLOG, CLEAR_CURRENT_BLOG } from '../constants/actionTypes';
+import { GET_BLOGS, GET_BLOG, CLEAR_CURRENT_BLOG, FETCHING } from '../constants/actionTypes';
 
 const defaultState = {
     listBlogs: [],
-    currentBlog: {}
+    currentBlog: {},
+    isFetching: false,
 };
 
 export default (state = defaultState, action) => {
@@ -10,20 +11,29 @@ export default (state = defaultState, action) => {
         case GET_BLOGS: {
             return {
                 ...state,
-                listBlogs: action.blogs
+                listBlogs: action.blogs,
+                isFetching: false,
             }
         }
         case GET_BLOG: {
             return {
                 ...state,
-                currentBlog: action.blog
+                currentBlog: action.blog,
+                isFetching: false,
             }
         }
         case CLEAR_CURRENT_BLOG: {
             return {
                 ...state,
-                currentBlog: {}
+                currentBlog: {},
+                isFetching: false,
             }
+        }
+        case FETCHING: {
+            return {
+                ...state,
+                isFetching: true,
+            };
         }
         default: {
             return state;

@@ -1,4 +1,4 @@
-import { GET_BLOGS, GET_BLOG, CLEAR_CURRENT_BLOG } from '../constants/actionTypes';
+import { GET_BLOGS, GET_BLOG, CLEAR_CURRENT_BLOG, FETCHING } from '../constants/actionTypes';
 
 export const getBlogs = blogs => {
     return {
@@ -17,5 +17,11 @@ export const getBlog = blog => {
 export const clearCurrentBlog = () => {
     return {
         type: CLEAR_CURRENT_BLOG
+    };
+};
+
+export const fetching = () => {
+    return {
+        type: FETCHING
     };
 };

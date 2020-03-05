@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import ItemBlog from '../components/item-blog/ItemBlog';
+import Loading from '../components/layouts/Loading';
 import '../css/blog.css';
 
 const perPage = 10;
@@ -15,6 +16,7 @@ export default class Blog extends React.Component {
     getListBlog(dispatch, page, perPage) {
         const apiGitHub = 'https://api.github.com';
         const pathGitHubApi = `${apiGitHub}/repos/duysmile/blogs-github/contents/blogs?ref=master&page=${page}&per_page=${perPage}`;
+        this.props.fetching();
         return axios.get(pathGitHubApi).then(
             response => dispatch(this.props.getBlogs(response.data)),
             err => console.error(err)
@@ -68,6 +70,7 @@ export default class Blog extends React.Component {
                         </div>
                     </div>
                     <div className="list-blog">
+                        {this.props.isFetching && <Loading />}
                         {blogElements}
                     </div>
                 </div>
