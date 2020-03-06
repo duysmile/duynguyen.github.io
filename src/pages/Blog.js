@@ -69,10 +69,10 @@ export default class Blog extends React.Component {
                             Nơi mình chia sẻ vài điều nho nhỏ về lập trình và cuộc sống.
                         </div>
                     </div>
-                    <div className="list-blog">
+                    <main className="list-blog">
                         {this.props.isFetching && <Loading />}
                         {blogElements}
-                    </div>
+                    </main>
                 </div>
             </div>
         );

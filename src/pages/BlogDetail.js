@@ -50,7 +50,7 @@ export default class BlogDetail extends React.Component {
                     <FontAwesomeIcon icon={faLongArrowAltLeft} />
                 </Link>
                 {this.props.isFetching && <Loading />}
-                <div className="box-content" dangerouslySetInnerHTML={{ __html: markdownText }}></div>
+                <main className="box-content" dangerouslySetInnerHTML={{ __html: markdownText }}></main>
             </div>
         );
     }

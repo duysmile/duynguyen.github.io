@@ -5,7 +5,7 @@ import '../css/home.css';
 
 function Home() {
     return (
-        <div className="custom-container custom-container__bg-dark custom-container__flex-box">
+        <main className="custom-container custom-container__bg-dark custom-container__flex-box">
             <div className="avatar">
                 <div className="text--hover">
                     <Link className="text-item--hover" to={'/blog'}>My Blog</Link>
@@ -16,7 +16,7 @@ function Home() {
             <br />
                 <small className="text-description">developer</small>
             </div>
-        </div>
+        </main>
     );
 }
 
