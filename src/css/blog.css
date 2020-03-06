@@ -37,6 +37,7 @@
     font-family: 'Roboto Mono', monospace;
     padding-bottom: 1rem;
     border-bottom: 3px solid #E8E9EB;
+    color: #363636;
 }
 
 .about-me .description {
@@ -44,7 +45,7 @@
     padding-top: 0.75rem;
     padding-left: 0.2rem;
     line-height: 1.75rem;
-    color: rgba(85, 91, 110, 0.8);
+    color: #363636;
 }
 
 .list-blog {
@@ -55,7 +56,7 @@
 
 .list-blog .time {
     font-size: 0.75rem;
-    color: #AAA;
+    color: rgb(195, 195, 195);
     padding-right: 0.3rem;
 }
 
