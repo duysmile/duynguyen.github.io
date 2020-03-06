@@ -64,7 +64,7 @@ export default class Blog extends React.Component {
                         <div className="logo"></div>
                         <h1 className="title">Duysmile Blog</h1>
                         <div className="author">
-                            By <Link to="/about">Duy Nguyen</Link>
+                            By <Link className="description" to="/about">Duy Nguyen</Link>
                         </div>
                         <div className="description">
                             Nơi mình chia sẻ vài điều nho nhỏ về lập trình và cuộc sống.
