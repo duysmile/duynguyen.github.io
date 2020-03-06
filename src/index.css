@@ -47,3 +47,15 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(71, 66, 66); 
 }
+
+.text-center {
+  text-align: 'center';
+}
+
+.block-center {
+  margin: 5rem auto;
+}
+
+.block-center:hover {
+  border: 4px white solid !important;
+}

@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import marked from 'marked';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons';
 import { Base64 } from 'js-base64';
 import { Link } from "react-router-dom";
 
