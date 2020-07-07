@@ -17,7 +17,7 @@ const About = () => {
                 <p>
                     Mình dành nhiều thời gian để đọc nhiều thứ bậy bạ thú vị
                     nhưng đọc đâu quên đấy, mà lại là đống tiếng Anh khó nhằn
-                    nên mình quyết định viết lại những gì đã đọc đã học
+                    nên mình quyết định viết lại những gì đã đọc đang học cùng chút ít kinh nghiệm lập trình
                     vào trong vài trang blog này.
                 </p>
                 <p>
