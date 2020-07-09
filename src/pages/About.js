@@ -12,7 +12,7 @@ const About = () => {
             <main className="box-content">
                 <h3 className="text-center">About me</h3>
                 <p>
-                    Mình là Duy, hiện vẫn đang là một sinh viên ở mãi trong trường chưa được ra.
+                    Mình là Duy Thanh, hiện vẫn đang là một sinh viên ở mãi trong trường chưa được ra.
                 </p>
                 <p>
                     Mình dành nhiều thời gian để đọc nhiều thứ bậy bạ thú vị
