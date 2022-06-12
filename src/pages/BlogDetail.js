@@ -5,6 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons';
 import { Base64 } from 'js-base64';
 import { Link } from "react-router-dom";
+import ReactMarkdown from 'react-markdown';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 import '../css/content.css';
 import Loading from '../components/layouts/Loading';
@@ -43,14 +46,35 @@ export default class BlogDetail extends React.Component {
 
     render() {
         const blog = convertBlog(this.props.blog);
-        const markdownText = marked(blog, renderer);
         return (
             <div className="custom-container custom-container__bg-raisin-black blog-content color-black-coral">
                 <Link className="link-back button-back" to={`/blog`}>
                     <FontAwesomeIcon icon={faLongArrowAltLeft} />
                 </Link>
                 {this.props.isFetching && <Loading />}
-                <main className="box-content" dangerouslySetInnerHTML={{ __html: markdownText }}></main>
+                <main className="box-content">
+                    <ReactMarkdown
+                        children={blog}
+                        components={{
+                            code({ node, inline, className, children, ...props }) {
+                                const match = className.includes('language') ? className.replace('language-', '') : '';
+                                return !inline && match ? (
+                                    <SyntaxHighlighter
+                                        children={String(children).replace(/\n$/, '')}
+                                        style={dracula}
+                                        language={match}
+                                        PreTag="div"
+                                        {...props}
+                                    />
+                                ) : (
+                                    <code className={className} {...props}>
+                                        {children}
+                                    </code>
+                                )
+                            }
+                        }}
+                    />
+                </main>
             </div>
         );
     }
