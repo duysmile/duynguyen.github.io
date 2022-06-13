@@ -57,7 +57,7 @@ export default class BlogDetail extends React.Component {
                         children={blog}
                         components={{
                             code({ node, inline, className, children, ...props }) {
-                                const match = className.includes('language') ? className.replace('language-', '') : '';
+                                const match = className && className.includes('language') ? className.replace('language-', '') : '';
                                 return !inline && match ? (
                                     <SyntaxHighlighter
                                         children={String(children).replace(/\n$/, '')}
