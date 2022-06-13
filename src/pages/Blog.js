@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import ItemBlog from '../components/item-blog/ItemBlog';
 import Loading from '../components/layouts/Loading';
+import Image from '../css/images/profile.jpg';
 import '../css/blog.css';
 
 const perPage = 10;
@@ -61,7 +62,10 @@ export default class Blog extends React.Component {
             <div className="custom-container custom-container__bg-raisin-black">
                 <div className="box-blog">
                     <div className="about-me color-black-coral">
-                        <div className="logo"></div>
+                        <div
+                            className="logo"
+                            style={{ backgroundImage: 'url(' + Image + ')'}}
+                        ></div>
                         <h1 className="title">Duysmile Blog</h1>
                         <div className="author">
                             By <Link className="description" to="/about">Duy Nguyen</Link>
