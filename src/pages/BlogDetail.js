@@ -48,7 +48,7 @@ export default class BlogDetail extends React.Component {
         const blog = convertBlog(this.props.blog);
         return (
             <div className="custom-container custom-container__bg-raisin-black blog-content color-black-coral">
-                <Link className="link-back button-back" to={`/blog`}>
+                <Link className="link-back button-back" to={`/`}>
                     <FontAwesomeIcon icon={faLongArrowAltLeft} />
                 </Link>
                 {this.props.isFetching && <Loading />}

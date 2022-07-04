@@ -6,7 +6,7 @@ import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons';
 const About = () => {
     return (
         <div className="custom-container custom-container__bg-raisin-black blog-content color-black-coral">
-            <Link className="link-back button-back" to={`/blog`}>
+            <Link className="link-back button-back" to={`/`}>
                 <FontAwesomeIcon icon={faLongArrowAltLeft} />
             </Link>
             <main className="box-content">
