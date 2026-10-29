@@ -7,6 +7,16 @@ export default defineConfig({
   // cv.html, not cv/index.html: Netlify then serves /cv without a trailing-slash redirect.
   trailingSlash: 'never',
   build: { format: 'file' },
-  integrations: [redirects({ source: blogSource, static: ['/about /cv 301'] })],
+  integrations: [
+    redirects({
+      source: blogSource,
+      static: [
+        '/about /cv 301',
+        // Links from the 2019 site use the post's blob SHA at the time; editing a post changes its SHA.
+        '/blog/7364aad2ad9202a24ac4b2d2d747ad832a99dec3 /blog/write-file-trong-go 301',
+        '/blog/94bc1f4be3c718286c3898dc364a278d0d1cd120 /blog/thiet-ke-payment-cho-he-thong-call 301',
+      ],
+    }),
+  ],
   markdown: { shikiConfig: { theme: 'github-dark-dimmed' } },
 });
