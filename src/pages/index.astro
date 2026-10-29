@@ -25,7 +25,6 @@ const day = (d: Date) => d.toISOString().slice(0, 10);
         <Laptop lines={profile.log} />
       </div>
     </div>
-    <div class="desk-top" aria-hidden="true"></div>
   </section>
 
   <section class="wrap notes">
@@ -50,9 +49,9 @@ const day = (d: Date) => d.toISOString().slice(0, 10);
     display: grid;
     grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
     gap: 48px;
-    align-items: end;
+    align-items: center;
   }
-  .intro { display: flex; flex-direction: column; gap: 22px; padding-bottom: clamp(48px, 12vh, 140px); }
+  .intro { display: flex; flex-direction: column; gap: 22px; }
   h1 { font-size: clamp(32px, 4.4vw, 50px); font-weight: 800; line-height: 1.12; letter-spacing: -0.01em; max-width: 14ch; }
   .lede { font-size: 17px; line-height: 1.75; color: var(--ink-3); max-width: 46ch; }
   .where { font-size: 13px; color: var(--muted); }
@@ -60,16 +59,6 @@ const day = (d: Date) => d.toISOString().slice(0, 10);
   .more { font-weight: 500; text-decoration: none; }
   .more:hover { text-decoration: underline; }
   .desk { display: flex; justify-content: center; }
-  .desk-top {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: clamp(40px, 8vh, 72px);
-    background: #4a4f55;
-    border-top: 10px solid #5a6066;
-  }
-  .hero::after { content: ''; display: block; height: clamp(40px, 8vh, 72px); }
 
   .notes { padding-top: 72px; display: flex; flex-direction: column; gap: 16px; }
   h2 { font-size: 20px; font-weight: 800; }
@@ -84,7 +73,6 @@ const day = (d: Date) => d.toISOString().slice(0, 10);
     .intro { padding-bottom: 0; }
   }
   @media (max-width: 640px) {
-    .desk-top, .hero::after { display: none; }
     .notes { padding-top: 56px; }
   }
   @media (max-width: 560px) {
