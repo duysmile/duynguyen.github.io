@@ -31,7 +31,7 @@ Regional Expansion — Experiments team.
 |---|---|---|
 | Offline Payments (EDC) | Owned backend from scratch: merchants take card + QR payments on Xendit terminals, tracked with online payments. | N, X |
 | | Turned an Indonesia-only flow into reusable APIs, data models, workflows → Malaysia, Vietnam. Thailand in progress. | N, X |
-| | Requirements → production in ~3 months. 1+ year live, zero critical payment incidents. | N |
+| | 1+ year live, zero critical payment incidents. | N |
 | | Phase 2: POS integration and payment sessions. Middleware between terminal provider and Xendit. | X |
 | | Ops tool in Go: reconciles bank merchant reports against FTP terminal reports. | X |
 | NAPAS card acquiring (VN) | Built connector, processor, payment-result handling, and payment card encryption. | X |

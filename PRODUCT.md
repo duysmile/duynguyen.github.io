@@ -17,7 +17,7 @@ Astro static site, deployed on Netlify at duysmile.com (user chose Astro over ke
 Personal site of Nguyen Duy ("Bean"), full-stack engineer, 7+ years. It makes years of unreflected work visible: who he is, what he built, what he writes. Success: a hiring manager understands his level fast and reaches the CV; an engineer finds work worth reading.
 
 ## Positioning
-**He owns it end to end.** He takes products from blank page to production and keeps them running: Xendit Offline Payments (to production in ~3 months, 1+ year with zero critical payment incidents), Pokerage backend, VNLP chatbot platform — all started from scratch.
+**He owns it end to end.** He takes products from blank page to production and keeps them running: Xendit Offline Payments (1+ year live with zero critical payment incidents), Pokerage backend, VNLP chatbot platform — all started from scratch.
 
 ## Capabilities and Constraints
 - Pages: home, CV (printable, ≤ 2 A4), projects, blog (from `github.com/duysmile/blogs-github/blogs` at build time), 404.
