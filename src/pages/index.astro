@@ -2,18 +2,21 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Laptop from '../components/Laptop.astro';
+import Mug from '../components/Mug.astro';
 import { profile } from '../data/profile';
 
 const latest = (await getCollection('blog'))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 3);
 const day = (d: Date) => d.toISOString().slice(0, 10);
+const headWords = profile.headline.split(' ');
+const lastWord = headWords.pop();
 ---
 <Base title="home" description={profile.intro}>
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="intro">
-        <h1>{profile.headline}</h1>
+        <h1>{headWords.join(' ')} <span class="tail">{lastWord}<span class="cup"><Mug /></span></span></h1>
         <p class="lede">{profile.intro}</p>
         <p class="where">{profile.name} · {profile.location}</p>
         <div class="actions">
@@ -59,6 +62,9 @@ const day = (d: Date) => d.toISOString().slice(0, 10);
   .more { font-weight: 500; text-decoration: none; }
   .more:hover { text-decoration: underline; }
   .desk { display: flex; justify-content: center; }
+  /* Last word + glass never wrap apart; the glass body sits on the text baseline, steam rises above the line. */
+  .tail { white-space: nowrap; }
+  .cup { position: relative; display: inline-block; width: 1em; height: 0.72em; margin-left: 0.14em; vertical-align: baseline; }
 
   .notes { padding-top: 72px; display: flex; flex-direction: column; gap: 16px; }
   h2 { font-size: 20px; font-weight: 800; }

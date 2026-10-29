@@ -30,10 +30,10 @@ flowchart LR
 - [x] **5 404 + error paths** (R6, R7, R5) — `404.astro`, `/about → /cv`; bad file name and duplicate slug fail the build.
   Verify: unit tests for both errors; build with fake bad source exits ≠ 0; `/xyz` shows 404 in preview.
 - [ ] **6 ⚠ Deploy** — steps, each with its own go-ahead:
-  1. Add `netlify.toml` (build `npm run build`, publish `dist`, Node 22). Commit on `feat/portfolio-rebuild`, push, open PR. Two-way.
-  2. You: in Netlify, confirm the site builds from this repo. Netlify then gives the PR a Deploy Preview.
-  3. Verify on the preview: Lighthouse ≥ 95 ×4; old `/blog/<sha>` and `/about` return 301; `/xyz` returns 404.
-  4. ⚠ Merge PR → production. Rollback: Netlify "Publish deploy" on the old deploy, or revert the merge.
+  1. ✓ Add `netlify.toml` (build `npm run build`, publish `dist`, Node 22). Commit on `feat/portfolio-rebuild`, push, open PR. Two-way. → PR #10
+  2. ✓ You: in Netlify, confirm the site builds from this repo. Netlify then gives the PR a Deploy Preview.
+  3. ✓ Verify on the preview: Lighthouse ≥ 95 ×4; old `/blog/<sha>` and `/about` return 301; `/xyz` returns 404. → Links OK (one hop). A11y 100, BP 96, Perf 79–95 on preview (Netlify toolbar), 100 locally; SEO 63 = preview `noindex`. Re-run on production.
+  4. ✓ ⚠ Merge PR → production. Rollback: Netlify "Publish deploy" on the old deploy, or revert the merge. → Live 2026-10-29. Prod Lighthouse: A11y 100, BP 100, SEO 92 (robots.txt), Perf 86–100.
   5. blogs-github: workflow calls a Netlify build hook on push. You create the hook and the repo secret.
 
 ## Learning candidates
@@ -41,4 +41,7 @@ flowchart LR
 - Netlify `_redirects` and build hooks.
 
 ## Follow-ups
-none
+- Fixed during deploy: Netlify NODE_ENV=production skipped dev deps (exit 127) → `npm ci --include=dev`.
+- Fixed: trailing-slash double redirect → `build.format: 'file'`.
+- Add valid `public/robots.txt` (SEO 92 → 100).
+- Optional: delete NODE_ENV and PUBLIC_URL in Netlify env.
