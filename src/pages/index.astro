@@ -54,9 +54,10 @@ const lastWord = headWords.pop();
     gap: 48px;
     align-items: center;
   }
-  .intro { display: flex; flex-direction: column; gap: 22px; }
-  h1 { font-size: clamp(32px, 4.4vw, 50px); font-weight: 800; line-height: 1.12; letter-spacing: -0.01em; max-width: 14ch; }
-  .lede { font-size: 17px; line-height: 1.75; color: var(--ink-3); max-width: 46ch; }
+  .intro { display: flex; flex-direction: column; gap: 22px; container-type: inline-size; }
+  /* One line: ~11.6em wide with the glass, so 8.6cqi fills the column. */
+  h1 { font-size: min(50px, 8.6cqi); font-weight: 800; line-height: 1.12; letter-spacing: -0.01em; white-space: nowrap; }
+  .lede { font-size: 17px; line-height: 1.75; color: var(--ink-3); max-width: 46ch; text-transform: lowercase; }
   .where { font-size: 13px; color: var(--muted); }
   .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 6px; }
   .more { font-weight: 500; text-decoration: none; }
