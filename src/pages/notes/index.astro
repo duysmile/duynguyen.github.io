@@ -5,15 +5,15 @@ import Base from '../../layouts/Base.astro';
 const posts = (await getCollection('blog')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 const fmt = (d: Date) => d.toISOString().slice(0, 10);
 ---
-<Base title="blog" description="Notes by Nguyen Duy on backend engineering, Go and system design." active="blog">
-  <section class="wrap blog">
+<Base title="notes" description="Notes by Nguyen Duy on backend engineering, Go and system design." active="notes">
+  <section class="wrap notes">
     <h1>Notes I wrote down.</h1>
     <p class="lede">Mostly backend, mostly in Vietnamese.</p>
     <ol class="list">
       {posts.map((p) => (
         <li>
           <time datetime={fmt(p.data.date)}>{fmt(p.data.date)}</time>
-          <a href={`/blog/${p.id}`} lang={p.data.lang}>{p.data.title}</a>
+          <a href={`/notes/${p.id}`} lang={p.data.lang}>{p.data.title}</a>
           <span class="meta">#{p.data.tag} · {p.data.readingMinutes} min</span>
         </li>
       ))}
@@ -22,7 +22,7 @@ const fmt = (d: Date) => d.toISOString().slice(0, 10);
 </Base>
 
 <style>
-  .blog { display: flex; flex-direction: column; gap: 12px; padding-top: 32px; }
+  .notes { display: flex; flex-direction: column; gap: 12px; padding-top: 32px; }
   h1 { font-size: clamp(26px, 4vw, 36px); font-weight: 800; }
   .lede { color: var(--ink-3); }
   .list { list-style: none; padding: 0; margin: 32px 0 0; border-top: 1px solid var(--line); max-width: 920px; }
