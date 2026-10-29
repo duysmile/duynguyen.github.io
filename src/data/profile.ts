@@ -8,7 +8,7 @@ export const profile: Profile = {
   intro:
     "Backend engineer, seven years. I take systems from a blank page to production and keep them quiet once they're live. Payments at Xendit since 2023.",
   summary:
-    'I build production systems in Go, Node.js and React, with a focus on payments, distributed systems and reliability. I like owning work end to end: at Xendit I built the Offline Payments backend from scratch, launched it in about three months, and have run it for over a year with zero critical payment incidents.',
+    'I build production systems in Go, Node.js and React, with a focus on payments, distributed systems and reliability. I like owning work end to end: at Xendit I built the Offline Payments backend from scratch, and it has run in production for over a year with zero critical payment incidents.',
   location: 'Ho Chi Minh City, Vietnam',
   email: 'duy210697@gmail.com',
   github: 'https://github.com/duysmile',
@@ -20,7 +20,6 @@ export const profile: Profile = {
     { when: '2021', level: 'INFO', msg: 'f6galaxy: real-time poker engine' },
     { when: '2022', level: 'INFO', msg: 'o2o: campaigns -> 200+ stores' },
     { when: '2023', level: 'INFO', msg: 'xendit: offline payments, day 0' },
-    { when: '2023', level: 'OK', msg: 'xendit: live in ~3 months' },
     { when: 'then', level: 'OK', msg: 'id -> my -> vn' },
     { when: 'now', level: 'OK', msg: '1y+ live, 0 critical incidents' },
     { when: 'now', level: 'INFO', msg: 'fuel: latte, refilled' },
@@ -39,7 +38,7 @@ export const profile: Profile = {
           points: [
             'Owned backend design and build from scratch: merchants take card and QR payments on Xendit terminals, tracked with online payments.',
             'Turned an Indonesia-only flow into reusable APIs, data models and workflows; expanded to Malaysia and Vietnam.',
-            'Requirements to production in ~3 months; 1+ year live with zero critical payment incidents.',
+            'Live for 1+ year with zero critical payment incidents.',
             'Phase 2: POS integration, payment sessions, middleware to the terminal provider; Go tool to reconcile bank reports.',
           ],
         },
