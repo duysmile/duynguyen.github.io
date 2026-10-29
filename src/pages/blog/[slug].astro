@@ -1,0 +1,52 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const day = post.data.date.toISOString().slice(0, 10);
+const excerpt = (post.body ?? '').replace(/[#>*`_\[\]]/g, '').replace(/\s+/g, ' ').trim().slice(0, 155);
+---
+<Base title={post.data.title} description={excerpt} active="blog">
+  <article class="wrap post" lang={post.data.lang}>
+    <div class="meta" lang="en">
+      <time datetime={day}>{day}</time>
+      <span>#{post.data.tag}</span>
+      <span>{post.data.readingMinutes} min read</span>
+    </div>
+    <h1>{post.data.title}</h1>
+    <div class="prose"><Content /></div>
+    <a class="back" href="/blog" lang="en">← all notes</a>
+  </article>
+</Base>
+
+<style>
+  .post { max-width: calc(720px + 2 * var(--gutter)); padding-top: 32px; display: flex; flex-direction: column; gap: 20px; }
+  .meta { display: flex; gap: 18px; flex-wrap: wrap; color: var(--muted); font-size: 13px; }
+  h1 { font-size: clamp(26px, 4vw, 34px); font-weight: 800; }
+  .back { margin-top: 32px; font-size: 14px; }
+  .prose { font-size: 16px; line-height: 1.8; color: var(--ink-2); overflow-wrap: anywhere; }
+  .prose :global(> * + *) { margin-top: 1.1em; }
+  .prose :global(h2) { font-size: 22px; margin-top: 2em; }
+  .prose :global(h3) { font-size: 18px; margin-top: 1.6em; }
+  .prose :global(ul), .prose :global(ol) { margin-bottom: 0; padding-left: 1.4em; }
+  .prose :global(li + li) { margin-top: 0.4em; }
+  .prose :global(img) { max-width: 100%; height: auto; border-radius: var(--radius); }
+  .prose :global(blockquote) { margin: 0; padding-left: 20px; border-left: 1px solid var(--muted); color: var(--ink-3); }
+  .prose :global(pre) {
+    background: var(--screen) !important;
+    padding: 20px 22px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .prose :global(:not(pre) > code) { background: var(--paper); padding: 1px 6px; border-radius: 4px; font-size: 0.92em; }
+  .prose :global(table) { border-collapse: collapse; display: block; overflow-x: auto; }
+  .prose :global(th), .prose :global(td) { border: 1px solid var(--line); padding: 6px 10px; }
+</style>

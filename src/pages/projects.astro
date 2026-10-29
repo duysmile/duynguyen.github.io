@@ -1,0 +1,71 @@
+---
+import Base from '../layouts/Base.astro';
+import WorkRow from '../components/WorkRow.astro';
+import { profile } from '../data/profile';
+---
+<Base title="projects" description="Products Nguyen Duy built at work, and his open-source contributions." active="projects">
+  <div class="wrap page">
+    <header class="intro">
+      <h1>Everything I've built, in one place.</h1>
+      <p>Products I built at work, and my open-source contributions.</p>
+      <nav aria-label="Sections">
+        <a href="#at-work">./at-work ({profile.work.length})</a>
+        <a href="#open-source">./open-source ({profile.oss.length})</a>
+      </nav>
+    </header>
+
+    <section id="at-work" aria-labelledby="at-work-h">
+      <h2 id="at-work-h" class="label">At work</h2>
+      <ol class="work">
+        {profile.work.map((p) => <WorkRow project={p} />)}
+      </ol>
+    </section>
+
+    <section id="open-source" aria-labelledby="oss-h">
+      <h2 id="oss-h" class="label">Open source</h2>
+      <ul class="oss">
+        {profile.oss.map((o) => (
+          <li>
+            <a href={o.url}>
+              <span class="repo">{o.repo}</span>
+              <span class="meta">{o.lang} · {o.prs} {o.prs === 1 ? 'PR' : 'PRs'}</span>
+              <span class="what">{o.what}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .page { display: flex; flex-direction: column; gap: 56px; padding-top: 32px; }
+  .intro { display: flex; flex-direction: column; gap: 10px; max-width: 760px; }
+  h1 { font-size: clamp(26px, 4vw, 36px); font-weight: 800; }
+  .intro p { color: var(--ink-3); font-size: 16px; }
+  .intro nav { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 6px; }
+  section { display: flex; flex-direction: column; gap: 12px; scroll-margin-top: 24px; }
+  .work { list-style: none; margin: 0; padding: 0; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
+  .oss { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .oss a {
+    height: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px 16px;
+    padding: 20px 24px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: var(--ink);
+    text-decoration: none;
+    transition: border-color 160ms ease-out;
+  }
+  .oss a:hover { border-color: var(--link); }
+  .oss a:hover .repo { text-decoration: underline; }
+  .repo { color: var(--link); font-weight: 500; overflow-wrap: anywhere; }
+  .meta { color: var(--muted); font-size: 13px; white-space: nowrap; }
+  .oss .what { grid-column: 1 / -1; font-size: 14px; line-height: 1.7; color: var(--ink-2); }
+  @media (max-width: 760px) {
+    .oss { grid-template-columns: 1fr; }
+  }
+</style>

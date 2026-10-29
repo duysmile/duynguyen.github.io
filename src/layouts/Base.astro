@@ -1,0 +1,94 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  active?: 'projects' | 'blog' | 'cv';
+}
+
+const { title, description, active } = Astro.props;
+const nav = [
+  { key: 'projects', href: '/projects', label: 'projects' },
+  { key: 'blog', href: '/blog', label: 'blog' },
+  { key: 'cv', href: '/cv', label: 'cv' },
+] as const;
+const fullTitle = title === 'home' ? 'Nguyen Duy (Bean) — backend engineer' : `${title} · Nguyen Duy`;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta name="theme-color" content="#e3e7eb" />
+  </head>
+  <body>
+    <!--
+      THESIS: a calm backend engineer at his desk; the work speaks, not the decoration. Refuses the loud dev-portfolio hero.
+      OWN-WORLD: cool grey wall, white paper, dark terminal screen; one face, JetBrains Mono; one muted link blue.
+      STORY: hiring manager sees what Bean owns end to end, opens the CV; engineers read the blog.
+      FIRST VIEWPORT: intro left (headline, two lines, two actions); laptop on a desk right, tailing a career log.
+      FORM: The Desk (round 2, user pick, laptop variant); seed 01e7ba5d.
+      FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+    -->
+    <a class="skip" href="#content">Skip to content</a>
+    <header class="site-header wrap">
+      <a class="brand" href="/">nguyen.duy <span>/ bean</span></a>
+      <nav aria-label="Main">
+        {nav.map((n) => (
+          <a href={n.href} aria-current={active === n.key ? 'page' : undefined}>{n.label}</a>
+        ))}
+      </nav>
+    </header>
+    <main id="content">
+      <slot />
+    </main>
+    <footer class="site-footer wrap">
+      <span>duysmile.com</span>
+      <span><a href="https://github.com/duysmile">github</a> · <a href="mailto:duy210697@gmail.com">email</a></span>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px 28px;
+    padding-block: 28px;
+  }
+  .brand { font-weight: 700; font-size: 17px; color: var(--ink); text-decoration: none; }
+  .brand span { font-weight: 400; color: var(--muted); }
+  nav { display: flex; gap: 28px; }
+  nav a {
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 500;
+    padding-block: 10px;
+    border-bottom: 2px solid transparent;
+  }
+  nav a:hover { color: var(--link); }
+  nav a[aria-current='page'] { color: var(--link); border-bottom-color: var(--link); }
+  .site-footer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    padding-block: 40px;
+    margin-top: 72px;
+    color: var(--muted);
+    font-size: 13px;
+    border-top: 1px solid var(--line);
+  }
+  @media print {
+    .site-header, .site-footer, .skip { display: none; }
+  }
+</style>

@@ -1,0 +1,85 @@
+@import '@fontsource-variable/jetbrains-mono/wght.css';
+@import '@fontsource-variable/jetbrains-mono/wght-italic.css';
+
+:root {
+  color-scheme: light;
+  --wall: #e3e7eb;
+  --paper: #ffffff;
+  --paper-2: #f7f8f9;
+  --ink: #1c2024;
+  --ink-2: #2b333b;
+  --ink-3: #3b444d;
+  --muted: #55606b;
+  --line: #cdd3d9;
+  --line-2: #e1e5e9;
+  --link: #1f4e79;
+  --link-hover: #123150;
+  --screen: #0e1317;
+  --screen-ink: #c9d4cc;
+  --screen-dim: #6c7a84;
+  --screen-ok: #9cc7a4;
+  --screen-info: #8db4e2;
+  --font: 'JetBrains Mono Variable', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --gutter: clamp(16px, 6vw, 96px);
+  --radius: 6px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  background: var(--wall);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  font-variant-ligatures: none;
+}
+
+body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; }
+main { flex: 1; }
+
+a { color: var(--link); text-underline-offset: 4px; text-decoration-thickness: 1px; }
+a:hover { color: var(--link-hover); }
+
+:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; border-radius: 2px; }
+::selection { background: #c9d9ea; color: var(--ink); }
+
+h1, h2, h3 { line-height: 1.25; text-wrap: balance; margin: 0; }
+p { margin: 0; text-wrap: pretty; }
+
+.wrap { width: 100%; max-width: 1248px; margin-inline: auto; padding-inline: var(--gutter); }
+
+.label {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: #f2f4f6;
+  font: inherit;
+  font-weight: 500;
+  text-decoration: none;
+  border: 0;
+  cursor: pointer;
+  transition: background-color 160ms ease-out;
+}
+.btn:hover { background: #33393f; color: #f2f4f6; }
+
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: 16px; top: 16px; background: var(--paper); padding: 8px 12px; z-index: 10; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

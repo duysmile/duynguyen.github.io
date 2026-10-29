@@ -1,0 +1,93 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Laptop from '../components/Laptop.astro';
+import { profile } from '../data/profile';
+
+const latest = (await getCollection('blog'))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+const day = (d: Date) => d.toISOString().slice(0, 10);
+---
+<Base title="home" description={profile.intro}>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="intro">
+        <h1>{profile.headline}</h1>
+        <p class="lede">{profile.intro}</p>
+        <p class="where">{profile.name} · {profile.location}</p>
+        <div class="actions">
+          <a class="btn" href="/projects">$ see the work</a>
+          <a class="more" href="/cv">read the cv →</a>
+        </div>
+      </div>
+      <div class="desk">
+        <Laptop lines={profile.log} />
+      </div>
+    </div>
+    <div class="desk-top" aria-hidden="true"></div>
+  </section>
+
+  <section class="wrap notes">
+    <h2>Latest notes</h2>
+    <ol>
+      {latest.map((p) => (
+        <li>
+          <time datetime={day(p.data.date)}>{day(p.data.date)}</time>
+          <a href={`/blog/${p.id}`} lang={p.data.lang}>{p.data.title}</a>
+        </li>
+      ))}
+    </ol>
+    <a class="more" href="/blog">all notes →</a>
+  </section>
+</Base>
+
+<style>
+  .hero { position: relative; padding-top: clamp(24px, 6vh, 72px); }
+  .hero-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: 48px;
+    align-items: end;
+  }
+  .intro { display: flex; flex-direction: column; gap: 22px; padding-bottom: clamp(48px, 12vh, 140px); }
+  h1 { font-size: clamp(32px, 4.4vw, 50px); font-weight: 800; line-height: 1.12; letter-spacing: -0.01em; max-width: 14ch; }
+  .lede { font-size: 17px; line-height: 1.75; color: var(--ink-3); max-width: 46ch; }
+  .where { font-size: 13px; color: var(--muted); }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 6px; }
+  .more { font-weight: 500; text-decoration: none; }
+  .more:hover { text-decoration: underline; }
+  .desk { display: flex; justify-content: center; }
+  .desk-top {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: clamp(40px, 8vh, 72px);
+    background: #4a4f55;
+    border-top: 10px solid #5a6066;
+  }
+  .hero::after { content: ''; display: block; height: clamp(40px, 8vh, 72px); }
+
+  .notes { padding-top: 72px; display: flex; flex-direction: column; gap: 16px; }
+  h2 { font-size: 20px; font-weight: 800; }
+  .notes ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); max-width: 760px; }
+  .notes li { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 4px 24px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .notes time { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; padding-top: 2px; }
+  .notes li a { color: var(--ink); font-weight: 700; text-decoration: none; }
+  .notes li a:hover { color: var(--link); text-decoration: underline; }
+
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .intro { padding-bottom: 0; }
+  }
+  @media (max-width: 640px) {
+    .desk-top, .hero::after { display: none; }
+    .notes { padding-top: 56px; }
+  }
+  @media (max-width: 560px) {
+    .notes li { grid-template-columns: 1fr; }
+  }
+</style>
