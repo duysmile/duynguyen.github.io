@@ -1,46 +1,53 @@
-<svg class="glass" viewBox="0 0 100 150" aria-hidden="true">
-  <defs>
-    <linearGradient id="steam-fade" x1="0" y1="1" x2="0" y2="0">
-      <stop offset="0" stop-color="#fff" stop-opacity="0" />
-      <stop offset="0.22" stop-color="#fff" stop-opacity="1" />
-      <stop offset="0.6" stop-color="#fff" stop-opacity="0.7" />
-      <stop offset="1" stop-color="#fff" stop-opacity="0" />
-    </linearGradient>
-    <mask id="steam-mask" maskUnits="userSpaceOnUse" x="10" y="-6" width="80" height="76">
-      <rect x="10" y="-6" width="80" height="76" fill="url(#steam-fade)" />
-    </mask>
-  </defs>
-  <g mask="url(#steam-mask)">
-    <g class="smoke" fill="none" stroke="#8c939a" stroke-width="3" stroke-linecap="round">
-      <path class="w" d="M36 66 c-6 -9 6 -14 0 -24 s 6 -15 0 -24" />
-      <path class="w w2" d="M50 68 c6 -9 -6 -14 0 -24 s -6 -15 0 -24" />
-      <path class="w w3" d="M62 66 c-5 -8 5 -12 0 -20 s 5 -12 0 -20" />
-    </g>
-  </g>
-  <path d="M16 72 H80 L76 138 A6 6 0 0 1 70 144 H26 A6 6 0 0 1 20 138 Z" fill="#e3e7eb" stroke="#8c939a" stroke-width="2" />
-  <path d="M18.6 80 H77.4 L76.6 92 H19.4 Z" fill="#f4ede4" />
-  <path d="M19.4 92 H76.6 L75.4 112 H20.6 Z" fill="#c8a47c" />
-  <path d="M20.6 112 H75.4 L74.4 136 A5 5 0 0 1 69.6 141 H26.4 A5 5 0 0 1 21.6 136 Z" fill="#6b4a33" />
-  <path d="M26 82 V134" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.7" />
-</svg>
+---
+// x: % from the left of the glass; d: delay in s. Negative delays start mid-flight, so steam is visible on load.
+const bits = [
+  { c: '1', x: 26, d: 0 },
+  { c: '0', x: 48, d: -0.6 },
+  { c: '1', x: 38, d: -1.2 },
+  { c: '0', x: 56, d: -1.8 },
+  { c: '1', x: 30, d: -2.4 },
+  { c: '0', x: 44, d: -3.0 },
+];
+---
+<span class="mug" aria-hidden="true">
+  <span class="steam">
+    {bits.map((b) => <span data-bit={b.c} style={`left:${b.x}%;animation-delay:${b.d}s`}></span>)}
+  </span>
+  <svg class="glass" viewBox="0 72 100 78">
+    <path d="M16 72 H80 L76 138 A6 6 0 0 1 70 144 H26 A6 6 0 0 1 20 138 Z" fill="#e3e7eb" stroke="#8c939a" stroke-width="2" />
+    <path d="M18.6 80 H77.4 L76.6 92 H19.4 Z" fill="#f4ede4" />
+    <path d="M19.4 92 H76.6 L75.4 112 H20.6 Z" fill="#c8a47c" />
+    <path d="M20.6 112 H75.4 L74.4 136 A5 5 0 0 1 69.6 141 H26.4 A5 5 0 0 1 21.6 136 Z" fill="#6b4a33" />
+    <path d="M26 82 V134" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.7" />
+  </svg>
+</span>
 
 <style>
-  .glass { display: block; width: 100%; height: auto; overflow: visible; filter: drop-shadow(0 10px 8px rgb(20 24 28 / 0.18)); }
-  .smoke { transform-box: fill-box; transform-origin: 50% 100%; animation: sway 7s ease-in-out infinite; }
-  .w { opacity: 0; animation: rise 3.6s cubic-bezier(0.33, 0, 0.4, 1) infinite; }
-  .w2 { animation-delay: -1.2s; }
-  .w3 { animation-delay: -2.4s; }
-  @keyframes rise {
-    0% { opacity: 0; transform: translateY(12px); }
-    25% { opacity: 0.9; }
-    100% { opacity: 0; transform: translateY(-14px); }
+  .mug { position: absolute; inset: 0; }
+  .glass { position: absolute; left: 0; bottom: -0.06em; width: 100%; overflow: visible; }
+  .steam { position: absolute; left: 0; right: 0; bottom: 0.66em; height: 1em; }
+  .steam span {
+    position: absolute;
+    bottom: 0;
+    font-size: 0.3em;
+    font-weight: 500;
+    line-height: 1;
+    color: #7f8c97;
+    opacity: 0;
+    animation: bit 3.6s cubic-bezier(0.33, 0, 0.4, 1) infinite;
   }
-  @keyframes sway {
-    0%, 100% { transform: translateX(0) skewX(0deg); }
-    50% { transform: translateX(2px) skewX(-4deg); }
+  /* Generated content keeps the digits out of the headline's text (SEO, copy-paste). */
+  .steam span::before { content: attr(data-bit); }
+  @keyframes bit {
+    0% { opacity: 0; transform: translate(0, 0); }
+    18% { opacity: 1; }
+    55% { transform: translate(0.25em, -1.4em); }
+    100% { opacity: 0; transform: translate(-0.15em, -2.8em); }
   }
   @media (prefers-reduced-motion: reduce) {
-    .smoke, .w { animation: none; }
-    .w { opacity: 0.55; }
+    .steam span { animation: none; opacity: 0.6; }
+    .steam span:nth-child(n + 4) { display: none; }
+    .steam span:nth-child(2) { bottom: 1.2em; }
+    .steam span:nth-child(3) { bottom: 2.4em; }
   }
 </style>
