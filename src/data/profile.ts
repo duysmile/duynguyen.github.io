@@ -23,6 +23,7 @@ export const profile: Profile = {
     { when: '2023', level: 'OK', msg: 'xendit: live in ~3 months' },
     { when: 'then', level: 'OK', msg: 'id -> my -> vn' },
     { when: 'now', level: 'OK', msg: '1y+ live, 0 critical incidents' },
+    { when: 'now', level: 'INFO', msg: 'fuel: latte, refilled' },
   ],
 
   jobs: [

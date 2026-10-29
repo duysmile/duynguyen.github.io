@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Laptop from '../components/Laptop.astro';
+import Mug from '../components/Mug.astro';
 import { profile } from '../data/profile';
 
 const latest = (await getCollection('blog'))
@@ -23,6 +24,7 @@ const day = (d: Date) => d.toISOString().slice(0, 10);
       </div>
       <div class="desk">
         <Laptop lines={profile.log} />
+        <div class="cup"><Mug /></div>
       </div>
     </div>
   </section>
@@ -58,7 +60,8 @@ const day = (d: Date) => d.toISOString().slice(0, 10);
   .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 6px; }
   .more { font-weight: 500; text-decoration: none; }
   .more:hover { text-decoration: underline; }
-  .desk { display: flex; justify-content: center; }
+  .desk { position: relative; display: flex; justify-content: center; }
+  .cup { position: absolute; right: max(-6%, -64px); bottom: -2px; width: clamp(72px, 8vw, 118px); pointer-events: none; }
 
   .notes { padding-top: 72px; display: flex; flex-direction: column; gap: 16px; }
   h2 { font-size: 20px; font-weight: 800; }
@@ -73,6 +76,7 @@ const day = (d: Date) => d.toISOString().slice(0, 10);
     .intro { padding-bottom: 0; }
   }
   @media (max-width: 640px) {
+    .cup { display: none; }
     .notes { padding-top: 56px; }
   }
   @media (max-width: 560px) {
