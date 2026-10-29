@@ -1,57 +1,46 @@
-<svg class="mug" viewBox="0 0 140 200" aria-hidden="true">
+<svg class="glass" viewBox="0 0 100 150" aria-hidden="true">
   <defs>
-    <linearGradient id="mug-body" x1="0" x2="1">
-      <stop offset="0" stop-color="#ffffff" />
-      <stop offset="0.45" stop-color="#f3f5f7" />
-      <stop offset="1" stop-color="#cfd5db" />
+    <linearGradient id="steam-fade" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0" />
+      <stop offset="0.22" stop-color="#fff" stop-opacity="1" />
+      <stop offset="0.6" stop-color="#fff" stop-opacity="0.7" />
+      <stop offset="1" stop-color="#fff" stop-opacity="0" />
     </linearGradient>
-    <radialGradient id="mug-crema" cx="0.45" cy="0.45" r="0.6">
-      <stop offset="0" stop-color="#d9b48a" />
-      <stop offset="0.7" stop-color="#b9865a" />
-      <stop offset="1" stop-color="#8f6240" />
-    </radialGradient>
-    <filter id="mug-smoke" x="-50%" y="-20%" width="200%" height="140%">
-      <feGaussianBlur stdDeviation="1.8" />
-    </filter>
+    <mask id="steam-mask" maskUnits="userSpaceOnUse" x="10" y="-6" width="80" height="76">
+      <rect x="10" y="-6" width="80" height="76" fill="url(#steam-fade)" />
+    </mask>
   </defs>
-
-  <g class="smoke" filter="url(#mug-smoke)" fill="none" stroke-linecap="round">
-    <path class="w w1" d="M54 96 C 44 82, 64 74, 54 60 S 62 38, 52 22" />
-    <path class="w w2" d="M68 98 C 78 84, 58 74, 68 58 S 60 36, 70 16" />
-    <path class="w w3" d="M82 96 C 72 84, 92 76, 82 62 S 88 42, 80 28" />
+  <g mask="url(#steam-mask)">
+    <g class="smoke" fill="none" stroke="#8c939a" stroke-width="3" stroke-linecap="round">
+      <path class="w" d="M36 66 c-6 -9 6 -14 0 -24 s 6 -15 0 -24" />
+      <path class="w w2" d="M50 68 c6 -9 -6 -14 0 -24 s -6 -15 0 -24" />
+      <path class="w w3" d="M62 66 c-5 -8 5 -12 0 -20 s 5 -12 0 -20" />
+    </g>
   </g>
-
-  <ellipse cx="68" cy="190" rx="60" ry="7" fill="rgb(20 24 28 / 0.18)" />
-  <ellipse cx="68" cy="184" rx="62" ry="10" fill="#e9ecef" stroke="#c3cad1" stroke-width="1.2" />
-  <ellipse cx="68" cy="182" rx="40" ry="5" fill="#d6dbe0" />
-
-  <path d="M106 124 h6 a17 17 0 0 1 0 34 h-8" fill="none" stroke="#c9d0d6" stroke-width="9" stroke-linecap="round" />
-  <path d="M106 124 h6 a17 17 0 0 1 0 34 h-8" fill="none" stroke="#f3f5f7" stroke-width="4" stroke-linecap="round" />
-  <path d="M24 108 h88 v52 a22 22 0 0 1 -22 22 H46 a22 22 0 0 1 -22 -22 z" fill="url(#mug-body)" stroke="#bfc7ce" stroke-width="1.2" />
-  <path d="M33 118 v40 a14 14 0 0 0 8 13" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" opacity="0.9" />
-
-  <ellipse cx="68" cy="108" rx="44" ry="9" fill="#e3e7eb" stroke="#bfc7ce" stroke-width="1.2" />
-  <ellipse cx="68" cy="109" rx="39" ry="6.5" fill="url(#mug-crema)" />
-  <path d="M68 114 c-9 -4 -12 -9 -7 -11 c3 -1 6 1 7 3 c1 -2 4 -4 7 -3 c5 2 2 7 -7 11 z" fill="#f4e9dc" />
+  <path d="M16 72 H80 L76 138 A6 6 0 0 1 70 144 H26 A6 6 0 0 1 20 138 Z" fill="#e3e7eb" stroke="#8c939a" stroke-width="2" />
+  <path d="M18.6 80 H77.4 L76.6 92 H19.4 Z" fill="#f4ede4" />
+  <path d="M19.4 92 H76.6 L75.4 112 H20.6 Z" fill="#c8a47c" />
+  <path d="M20.6 112 H75.4 L74.4 136 A5 5 0 0 1 69.6 141 H26.4 A5 5 0 0 1 21.6 136 Z" fill="#6b4a33" />
+  <path d="M26 82 V134" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.7" />
 </svg>
 
 <style>
-  .mug { display: block; width: 100%; height: auto; overflow: visible; }
-  .w {
-    stroke: #8f99a3;
-    stroke-width: 7;
-    stroke-dasharray: 48 60;
-    animation: rise 4.2s linear infinite;
-  }
-  .w2 { stroke-width: 8; animation-duration: 5s; animation-delay: -1.6s; }
-  .w3 { stroke-width: 6; animation-duration: 4.6s; animation-delay: -3s; }
+  .glass { display: block; width: 100%; height: auto; overflow: visible; filter: drop-shadow(0 10px 8px rgb(20 24 28 / 0.18)); }
+  .smoke { transform-box: fill-box; transform-origin: 50% 100%; animation: sway 7s ease-in-out infinite; }
+  .w { opacity: 0; animation: rise 3.6s cubic-bezier(0.33, 0, 0.4, 1) infinite; }
+  .w2 { animation-delay: -1.2s; }
+  .w3 { animation-delay: -2.4s; }
   @keyframes rise {
-    0% { stroke-dashoffset: 0; opacity: 0; }
-    12% { opacity: 0.9; }
-    65% { opacity: 0.6; }
-    100% { stroke-dashoffset: -108; opacity: 0; }
+    0% { opacity: 0; transform: translateY(12px); }
+    25% { opacity: 0.9; }
+    100% { opacity: 0; transform: translateY(-14px); }
+  }
+  @keyframes sway {
+    0%, 100% { transform: translateX(0) skewX(0deg); }
+    50% { transform: translateX(2px) skewX(-4deg); }
   }
   @media (prefers-reduced-motion: reduce) {
-    .w { animation: none; stroke-dasharray: none; opacity: 0.45; }
+    .smoke, .w { animation: none; }
+    .w { opacity: 0.55; }
   }
 </style>

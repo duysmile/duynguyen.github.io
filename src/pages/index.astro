@@ -49,7 +49,7 @@ const day = (d: Date) => d.toISOString().slice(0, 10);
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
     gap: 48px;
     align-items: center;
   }
@@ -60,8 +60,9 @@ const day = (d: Date) => d.toISOString().slice(0, 10);
   .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 6px; }
   .more { font-weight: 500; text-decoration: none; }
   .more:hover { text-decoration: underline; }
-  .desk { position: relative; display: flex; justify-content: center; }
-  .cup { position: absolute; right: max(-6%, -64px); bottom: -2px; width: clamp(72px, 8vw, 118px); pointer-events: none; }
+  .desk { display: flex; justify-content: center; align-items: flex-end; gap: clamp(10px, 1.4vw, 20px); }
+  .desk :global(.laptop) { flex: 1 1 auto; min-width: 0; }
+  .cup { flex: none; width: clamp(64px, 7vw, 104px); }
 
   .notes { padding-top: 72px; display: flex; flex-direction: column; gap: 16px; }
   h2 { font-size: 20px; font-weight: 800; }
