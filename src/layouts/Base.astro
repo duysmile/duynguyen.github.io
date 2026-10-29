@@ -4,13 +4,13 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description: string;
-  active?: 'projects' | 'blog' | 'cv';
+  active?: 'projects' | 'notes' | 'cv';
 }
 
 const { title, description, active } = Astro.props;
 const nav = [
   { key: 'projects', href: '/projects', label: 'projects' },
-  { key: 'blog', href: '/blog', label: 'blog' },
+  { key: 'notes', href: '/notes', label: 'notes' },
   { key: 'cv', href: '/cv', label: 'cv' },
 ] as const;
 const fullTitle = title === 'home' ? 'Nguyen Duy (Bean) — backend engineer' : `${title} · Nguyen Duy`;
@@ -32,7 +32,7 @@ const fullTitle = title === 'home' ? 'Nguyen Duy (Bean) — backend engineer' : 
     <!--
       THESIS: a calm backend engineer at his desk; the work speaks, not the decoration. Refuses the loud dev-portfolio hero.
       OWN-WORLD: cool grey wall, white paper, dark terminal screen; one face, JetBrains Mono; one muted link blue.
-      STORY: hiring manager sees what Bean owns end to end, opens the CV; engineers read the blog.
+      STORY: hiring manager sees what Bean owns end to end, opens the CV; engineers read the notes.
       FIRST VIEWPORT: intro left (headline, two lines, two actions); laptop on a desk right, tailing a career log.
       FORM: The Desk (round 2, user pick, laptop variant); seed 01e7ba5d.
       FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md

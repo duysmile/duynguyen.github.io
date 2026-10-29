@@ -117,6 +117,6 @@ describe('loadPosts', () => {
 describe('redirectLines', () => {
   it('maps old sha URLs to slugs', () => {
     const p = toPost({ name: 'Write_file_trong_Go.05_07_2022.golang.md', sha: 'abc123', markdown: '' });
-    expect(redirectLines([p])).toEqual(['/blog/abc123 /blog/write-file-trong-go 301']);
+    expect(redirectLines([p])).toEqual(['/blog/abc123 /notes/write-file-trong-go 301']);
   });
 });

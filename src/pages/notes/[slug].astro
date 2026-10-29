@@ -12,7 +12,7 @@ const { Content } = await render(post);
 const day = post.data.date.toISOString().slice(0, 10);
 const excerpt = (post.body ?? '').replace(/[#>*`_\[\]]/g, '').replace(/\s+/g, ' ').trim().slice(0, 155);
 ---
-<Base title={post.data.title} description={excerpt} active="blog">
+<Base title={post.data.title} description={excerpt} active="notes">
   <article class="wrap post" lang={post.data.lang}>
     <div class="meta" lang="en">
       <time datetime={day}>{day}</time>
@@ -21,7 +21,7 @@ const excerpt = (post.body ?? '').replace(/[#>*`_\[\]]/g, '').replace(/\s+/g, ' 
     </div>
     <h1>{post.data.title}</h1>
     <div class="prose"><Content /></div>
-    <a class="back" href="/blog" lang="en">← all notes</a>
+    <a class="back" href="/notes" lang="en">← all notes</a>
   </article>
 </Base>
 

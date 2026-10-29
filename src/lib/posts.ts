@@ -89,5 +89,5 @@ export async function loadPosts(source: PostSource): Promise<Post[]> {
 }
 
 export function redirectLines(posts: Post[]): string[] {
-  return posts.map((p) => `/blog/${p.sha} /blog/${p.slug} 301`);
+  return posts.map((p) => `/blog/${p.sha} /notes/${p.slug} 301`);
 }

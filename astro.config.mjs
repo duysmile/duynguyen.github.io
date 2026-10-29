@@ -13,9 +13,11 @@ export default defineConfig({
       static: [
         '/about /cv 301',
         // Links from the 2019 site use the post's blob SHA at the time; editing a post changes its SHA.
-        '/blog/7364aad2ad9202a24ac4b2d2d747ad832a99dec3 /blog/write-file-trong-go 301',
-        '/blog/94bc1f4be3c718286c3898dc364a278d0d1cd120 /blog/thiet-ke-payment-cho-he-thong-call 301',
+        '/blog/7364aad2ad9202a24ac4b2d2d747ad832a99dec3 /notes/write-file-trong-go 301',
+        '/blog/94bc1f4be3c718286c3898dc364a278d0d1cd120 /notes/thiet-ke-payment-cho-he-thong-call 301',
       ],
+      // After the per-post SHA lines: Netlify uses the first match.
+      tail: ['/blog /notes 301', '/blog/* /notes/:splat 301'],
     }),
   ],
   markdown: { shikiConfig: { theme: 'github-dark-dimmed' } },
