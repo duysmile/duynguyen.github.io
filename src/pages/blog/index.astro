@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const posts = (await getCollection('blog')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const fmt = (d: Date) => d.toISOString().slice(0, 10);
+---
+<Base title="blog" description="Notes by Nguyen Duy on backend engineering, Go and system design." active="blog">
+  <section class="wrap blog">
+    <h1>Notes I wrote down.</h1>
+    <p class="lede">Mostly backend, mostly in Vietnamese.</p>
+    <ol class="list">
+      {posts.map((p) => (
+        <li>
+          <time datetime={fmt(p.data.date)}>{fmt(p.data.date)}</time>
+          <a href={`/blog/${p.id}`} lang={p.data.lang}>{p.data.title}</a>
+          <span class="meta">#{p.data.tag} · {p.data.readingMinutes} min</span>
+        </li>
+      ))}
+    </ol>
+  </section>
+</Base>
+
+<style>
+  .blog { display: flex; flex-direction: column; gap: 12px; padding-top: 32px; }
+  h1 { font-size: clamp(26px, 4vw, 36px); font-weight: 800; }
+  .lede { color: var(--ink-3); }
+  .list { list-style: none; padding: 0; margin: 32px 0 0; border-top: 1px solid var(--line); max-width: 920px; }
+  .list li {
+    display: grid;
+    grid-template-columns: 120px minmax(0, 1fr) auto;
+    gap: 6px 24px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: baseline;
+  }
+  time, .meta { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+  .list a { font-weight: 700; font-size: 16px; text-decoration: none; color: var(--ink); }
+  .list a:hover { color: var(--link); text-decoration: underline; }
+  @media (max-width: 640px) {
+    .list li { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="not found" description="This page does not exist.">
+  <section class="wrap nf">
+    <pre class="screen" aria-hidden="true"><span class="dim">$ curl -I https://duysmile.com/…</span>
+HTTP/2 <span class="err">404</span>
+</pre>
+    <h1>This page doesn't exist.</h1>
+    <p>The link may be old, or the post was renamed.</p>
+    <p class="links"><a href="/">home</a> · <a href="/blog">all notes</a> · <a href="/cv">cv</a></p>
+  </section>
+</Base>
+
+<style>
+  .nf { display: flex; flex-direction: column; gap: 16px; padding-top: 48px; max-width: calc(720px + 2 * var(--gutter)); }
+  .screen {
+    margin: 0 0 16px;
+    padding: 18px 22px;
+    background: var(--screen);
+    color: var(--screen-ink);
+    border-radius: 8px;
+    font: inherit;
+    font-size: 14px;
+    overflow-x: auto;
+  }
+  .dim { color: var(--screen-dim); }
+  .err { color: #e8a398; }
+  h1 { font-size: clamp(24px, 4vw, 32px); font-weight: 800; }
+  p { color: var(--ink-3); }
+  .links { font-weight: 500; }
+</style>

@@ -1,0 +1,45 @@
+---
+import type { WorkProject } from '../data/types';
+
+interface Props {
+  project: WorkProject;
+}
+
+const { project } = Astro.props;
+---
+<li class="row">
+  <span class="when">{project.when}</span>
+  <div class="name">
+    <h3>{project.name}</h3>
+    <span class="org">@ {project.org}</span>
+  </div>
+  <p class="what">{project.what}</p>
+  <p class="stack">{project.stack.join(' · ')}</p>
+</li>
+
+<style>
+  .row {
+    display: grid;
+    grid-template-columns: 96px minmax(0, 15rem) minmax(0, 1fr) minmax(0, 15rem);
+    gap: 6px 24px;
+    padding: 18px 28px;
+    border-bottom: 1px solid var(--line-2);
+    align-items: baseline;
+  }
+  .row:last-child { border-bottom: 0; }
+  .when, .org, .stack { font-size: 13px; color: var(--muted); }
+  .when { font-variant-numeric: tabular-nums; }
+  .name { display: flex; flex-direction: column; gap: 2px; }
+  h3 { font-size: 15px; font-weight: 700; }
+  .what { font-size: 14px; line-height: 1.7; color: var(--ink-2); }
+  .stack { line-height: 1.6; }
+
+  @media (max-width: 1080px) {
+    .row { grid-template-columns: 96px minmax(0, 1fr); }
+    .what, .stack { grid-column: 2; }
+  }
+  @media (max-width: 560px) {
+    .row { grid-template-columns: 1fr; padding: 16px 18px; }
+    .what, .stack { grid-column: auto; }
+  }
+</style>

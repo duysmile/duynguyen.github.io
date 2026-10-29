@@ -1,0 +1,7 @@
+[build]
+  # NODE_ENV=production is set in Netlify; without --include=dev, npm ci skips vitest.
+  command = "npm ci --include=dev && npm test && npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"

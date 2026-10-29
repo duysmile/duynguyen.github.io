@@ -1,0 +1,110 @@
+---
+import Base from '../layouts/Base.astro';
+import JobEntry from '../components/JobEntry.astro';
+import { profile } from '../data/profile';
+
+const githubHandle = profile.github.replace('https://', '');
+---
+<Base title="cv" description={`CV of ${profile.name}: ${profile.summary}`} active="cv">
+  <div class="wrap">
+    <article class="cv">
+      <div class="main">
+        <header class="head">
+          <div class="who">
+            <h1>{profile.name}</h1>
+            <p class="role">Full-stack software engineer, mostly backend · 7+ years</p>
+            <p class="print-only contact-line">{profile.location} · {profile.email} · {githubHandle} · duysmile.com</p>
+          </div>
+          <button type="button" class="btn no-print" data-print>$ download pdf</button>
+        </header>
+        <p class="summary">{profile.summary}</p>
+        <h2 class="label">Experience</h2>
+        {profile.jobs.map((job) => <JobEntry job={job} />)}
+        <JobEntry job={profile.earlier} />
+      </div>
+
+      <aside class="side">
+        <div class="block no-print">
+          <h2 class="label">Contact</h2>
+          <span>{profile.location}</span>
+          <a href={`mailto:${profile.email}`}>{profile.email}</a>
+          <a href={profile.github}>{githubHandle}</a>
+        </div>
+        {profile.skills.map((s) => (
+          <div class="block">
+            <h2 class="label">{s.area}</h2>
+            <span>{s.items}</span>
+          </div>
+        ))}
+        <div class="block">
+          <h2 class="label">Open source</h2>
+          {profile.oss.map((o) => (
+            <span><a href={o.url}><b>{o.repo}</b></a><br />{o.what}</span>
+          ))}
+        </div>
+        <div class="block">
+          <h2 class="label">Education</h2>
+          <span><b>{profile.education.school}</b><br />{profile.education.degree}<br />{profile.education.when}</span>
+        </div>
+        <div class="block">
+          <h2 class="label">Awards</h2>
+          {profile.awards.map((a) => <span><b>{a.title}</b><br />{a.org}, {a.year}</span>)}
+        </div>
+      </aside>
+    </article>
+  </div>
+</Base>
+
+<script>
+  document.querySelector('[data-print]')?.addEventListener('click', () => window.print());
+</script>
+
+<style>
+  .cv {
+    margin-top: 12px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+  }
+  .main { padding: 56px 52px 60px 60px; display: flex; flex-direction: column; gap: 32px; border-right: 1px solid var(--line-2); }
+  .head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px 24px; }
+  .who { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+  @media (max-width: 560px) { .head { flex-wrap: wrap; } }
+  .head .btn { flex-shrink: 0; margin-top: 4px; }
+  h1 { font-size: clamp(28px, 4vw, 36px); font-weight: 800; }
+  .role { font-size: 16px; color: var(--ink-3); }
+  .summary { font-size: 15px; line-height: 1.75; color: var(--ink-2); max-width: 70ch; }
+  .main > .label { padding-bottom: 10px; border-bottom: 1px solid var(--line); margin-top: 8px; }
+  .side { padding: 56px 32px; display: flex; flex-direction: column; gap: 28px; background: var(--paper-2); font-size: 13px; line-height: 1.7; border-radius: 0 var(--radius) var(--radius) 0; }
+  .block { display: flex; flex-direction: column; gap: 6px; }
+  .block .label { font-size: 12px; }
+  .print-only { display: none; }
+  .contact-line { font-size: 13px; color: var(--muted); }
+
+  @media (max-width: 900px) {
+    .cv { grid-template-columns: 1fr; }
+    .main { border-right: 0; border-bottom: 1px solid var(--line-2); padding: 32px 20px 40px; }
+    .side { padding: 32px 20px; border-radius: 0 0 var(--radius) var(--radius); }
+  }
+
+  @media print {
+    @page { size: A4; margin: 12mm 12mm 12mm 14mm; }
+    :global(html) { background: #fff; font-size: 9pt; }
+    :global(.wrap) { max-width: none; padding: 0; }
+    :global(main) { flex: none; }
+    .no-print { display: none; }
+    .print-only { display: block; }
+    .cv { margin: 0; border: 0; border-radius: 0; grid-template-columns: minmax(0, 1fr) 52mm; }
+    .main { padding: 0 6mm 0 0; gap: 9px; border-right: 1px solid var(--line); }
+    .side { padding: 0 0 0 5mm; gap: 9px; background: none; font-size: 8pt; line-height: 1.45; }
+    h1 { font-size: 20pt; }
+    .role { font-size: 10pt; }
+    .contact-line { font-size: 8pt; }
+    .summary { font-size: 9pt; line-height: 1.5; }
+    .label { font-size: 7.5pt !important; }
+    .main > .label { padding-bottom: 3px; margin-top: 2px; }
+    a { color: var(--ink); text-decoration: none; }
+  }
+</style>
