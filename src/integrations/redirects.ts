@@ -8,7 +8,7 @@ export function redirects(opts: { source: PostSource; static: string[] }): Astro
     hooks: {
       'astro:build:done': async ({ dir, logger }) => {
         const posts = await loadPosts(opts.source);
-        const lines = [...opts.static, ...redirectLines(posts)];
+        const lines = [...new Set([...opts.static, ...redirectLines(posts)])];
         await writeFile(new URL('_redirects', dir), lines.join('\n') + '\n');
         logger.info(`wrote ${lines.length} redirects`);
       },
