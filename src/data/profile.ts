@@ -4,7 +4,7 @@ import type { Profile } from './types';
 export const profile: Profile = {
   name: 'Nguyen Duy',
   nickname: 'Bean',
-  headline: "I build the part you don't see.",
+  headline: 'build it, ship it',
   intro:
     "Backend engineer, seven years. I take systems from a blank page to production and keep them quiet once they're live. Payments at Xendit since 2023.",
   summary:
