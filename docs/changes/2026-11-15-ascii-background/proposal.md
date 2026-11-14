@@ -1,9 +1,9 @@
 ---
 tags: [change, duynguyen-github-io]
-status: in-progress
+status: implemented
 size: small
 mode: yolo
-gate: "GF: approve the build, or comment in the viewer."
+gate: "none: build approved 2026-11-15."
 created: 2026-11-15
 repo: github.com/duysmile/duynguyen.github.io
 branch: feat/ascii-background

@@ -1,7 +1,7 @@
 ---
 tags: [review, duynguyen-github-io]
 change: "[[proposal]]"
-status: ready
+status: accepted
 ---
 # Review: ASCII background
 
