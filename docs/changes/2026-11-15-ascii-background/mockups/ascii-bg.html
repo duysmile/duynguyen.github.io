@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ASCII background mockup</title>
+<style>
+  :root {
+    color-scheme: light;
+    --wall: #e3e7eb; --ink: #1c2024; --ink-3: #3b444d; --muted: #55606b;
+    --line: #cdd3d9; --link: #1f4e79;
+    --screen: #0e1317; --screen-ink: #c9d4cc; --screen-dim: #8593a0;
+    --screen-ok: #9cc7a4; --screen-info: #8db4e2;
+    --font: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+    --gutter: clamp(16px, 6vw, 96px);
+    --frame: #55606b; --fill: #8f9aa5; --t-dim: #55606b; --t-ok: #2f6b3f; --t-info: #1f4e79; --t-msg: #2b333b;
+  }
+  :root.night {
+    color-scheme: dark;
+    --wall: #090d12; --ink: #e8edf2; --ink-3: #bcc6d0; --muted: #8a97a4;
+    --line: #222c36; --link: #8db4e2;
+    --frame: #7d8ea0; --fill: #4c5d70; --t-dim: #8593a0; --t-ok: #9cc7a4; --t-info: #8db4e2; --t-msg: #c9d4cc;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { background: var(--wall); color: var(--ink); font-family: var(--font); font-size: 15px; line-height: 1.7; font-variant-ligatures: none; }
+  body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; }
+  main { flex: 1; }
+  h1, h2 { line-height: 1.25; margin: 0; }
+  p { margin: 0; }
+  a { color: var(--link); }
+  .wrap { width: 100%; max-width: 1248px; margin-inline: auto; padding-inline: var(--gutter); }
+
+  #ascii { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+  header, main, footer { position: relative; z-index: 1; }
+
+  header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px 28px; padding-block: 28px; }
+  .brand { font-weight: 700; font-size: 17px; color: var(--ink); text-decoration: none; }
+  .brand span { font-weight: 400; color: var(--muted); }
+  nav { display: flex; gap: 28px; }
+  nav a { color: var(--ink); text-decoration: none; font-weight: 500; padding-block: 10px; }
+
+  .hero { padding-top: clamp(24px, 6vh, 72px); }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 48px; align-items: center; }
+  .intro { display: flex; flex-direction: column; gap: 22px; container-type: inline-size; }
+  h1 { font-size: min(50px, 8.6cqi); font-weight: 800; line-height: 1.12; letter-spacing: -0.01em; white-space: nowrap; }
+  .lede { font-size: 17px; line-height: 1.75; color: var(--ink-3); max-width: 46ch; }
+  .where { font-size: 13px; color: var(--muted); }
+  .desk { display: flex; justify-content: center; container-type: inline-size; }
+  .laptop { margin: 0; color: var(--frame); }
+  .laptop pre { margin: 0; font: inherit; white-space: pre; }
+  .laptop .fill { color: var(--fill); } .laptop .dim { color: var(--t-dim); } .laptop .ok { color: var(--t-ok); }
+  .laptop .info { color: var(--t-info); } .laptop .msg { color: var(--t-msg); }
+  .laptop .r { color: #d9564b; } .laptop .y { color: #c99a2e; } .laptop .g { color: #3f9a55; }
+  .laptop .hi { color: var(--t-msg); }
+  .laptop .cur { color: var(--t-msg); animation: blink 1.1s steps(1) infinite; }
+
+  .laptop.wide { display: block; width: 100%; max-width: 640px; }
+
+  .laptop.small { display: none; font-size: min(15px, calc(100cqi / (var(--cols) * 0.602))); line-height: 1.25; }
+  .laptop.small .row { background: var(--wall); }
+  @keyframes blink { 50% { opacity: 0; } }
+  @media (max-width: 640px) { .laptop.wide { display: none; } .laptop.small { display: block; } }
+  @media (prefers-reduced-motion: reduce) { .laptop .cur { animation: none; } }
+
+  .notes { padding-top: 72px; display: flex; flex-direction: column; gap: 16px; }
+  h2 { font-size: 20px; font-weight: 800; }
+  .notes ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); max-width: 760px; }
+  .notes li { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 4px 24px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .notes time { color: var(--muted); font-size: 13px; padding-top: 2px; }
+  .notes li a { color: var(--ink); font-weight: 700; text-decoration: none; }
+  .more { font-weight: 500; text-decoration: none; }
+
+  footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; padding-block: 40px 88px; margin-top: 72px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); }
+
+  .pick { position: fixed; z-index: 5; left: 50%; bottom: 16px; transform: translateX(-50%); display: flex; gap: 4px; padding: 4px; border-radius: 8px; background: #15181b; box-shadow: 0 8px 24px -8px rgb(0 0 0 / 0.5); max-width: calc(100vw - 24px); }
+  .pick button { font: inherit; font-size: 12px; white-space: nowrap; min-height: 36px; padding: 0 12px; border: 0; border-radius: 5px; background: transparent; color: #a9b4bf; cursor: pointer; }
+  .pick button[aria-pressed='true'] { background: #e8edf2; color: #15181b; font-weight: 700; }
+  .pick button:focus-visible { outline: 2px solid #8db4e2; outline-offset: 2px; }
+
+  @media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; } }
+  @media (max-width: 560px) { .notes li { grid-template-columns: 1fr; } .pick button { padding: 0 8px; } }
+</style>
+</head>
+<body>
+<canvas id="ascii" aria-hidden="true"></canvas>
+
+<header class="wrap">
+  <a class="brand" href="#">nguyen.duy <span>/ bean</span></a>
+  <nav aria-label="Main"><a href="#">projects</a><a href="#">notes</a><a href="#">cv</a></nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="intro">
+        <h1>build it, ship it</h1>
+        <p class="lede">backend engineer, seven years. i take systems from a blank page to production and keep them quiet once they're live. payments at xendit since 2023.</p>
+        <p class="where">Nguyen Duy · Ho Chi Minh City, Vietnam</p>
+      </div>
+      <div class="desk">
+        <canvas class="laptop wide" id="mac" role="img" aria-label="MacBook screen tailing Bean's career log"></canvas>
+        <pre class="laptop small" id="term" aria-hidden="true"></pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap notes">
+    <h2>Things I wrote down</h2>
+    <ol>
+      <li><time>2022-07-05</time><a href="#">Read/Write file in Golang</a></li>
+      <li><time>2022-06-12</time><a href="#">How do I design payment system for call center?</a></li>
+    </ol>
+    <a class="more" href="#">read them all →</a>
+  </section>
+</main>
+
+<footer class="wrap"><span>duysmile.com</span><span>github · email</span></footer>
+
+<div class="pick" role="group" aria-label="Background variant">
+  <button data-mode="field">A · quiet field</button>
+  <button data-mode="night">B · night sky</button>
+  <button data-mode="tree">C · letter tree</button>
+</div>
+
+<script>
+(() => {
+  const LOG = [
+    ['2018', 'INFO', 'rikkeisoft: cinema tickets on lambda'],
+    ['2019', 'INFO', 'em&ai: chatbot platform, from scratch'],
+    ['2020', 'OK', 'award: best employee of the year'],
+    ['2021', 'INFO', 'f6galaxy: real-time poker engine'],
+    ['2022', 'INFO', 'o2o: campaigns -> 200+ stores'],
+    ['2023', 'INFO', 'xendit: offline payments, day 0'],
+    ['now', 'OK', '1y+ live, 0 critical incidents'],
+  ];
+  const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const lines = [
+    [['$ tail -f /var/log/bean.log', 'dim']],
+    ...LOG.map(([w, l, m]) => [[w.padEnd(4), 'dim'], [' '], [l === 'OK' ? ' OK ' : 'INFO', l === 'OK' ? 'ok' : 'info'], [' '], [m, 'msg']]),
+    [['_', 'cur']],
+  ];
+  const spans = (parts) => parts.map(([t, c]) => (c ? `<span class="${c}">${esc(t)}</span>` : t)).join('');
+  const len = (parts) => parts.reduce((n, [t]) => n + t.length, 0);
+  const rep = (c, n) => c.repeat(Math.max(0, Math.round(n)));
+
+  // Wide: the whole MacBook is one image made of characters; each letter on the screen is 3x5 cells.
+  const FONT = {
+    A: '010101111101101', B: '110101110101110', C: '011100100100011', D: '110101101101110', E: '111100110100111',
+    F: '111100110100100', G: '011100101101011', H: '101101111101101', I: '111010010010111', J: '001001001101010',
+    K: '101101110101101', L: '100100100100111', M: '101111111101101', N: '110101101101101', O: '010101101101010',
+    P: '110101110100100', Q: '010101101111011', R: '110101110101101', S: '011100010001110', T: '111010010010010',
+    U: '101101101101111', V: '101101101101010', W: '101101111111101', X: '101101010101101', Y: '101101010010010',
+    Z: '111001010100111', 0: '111101101101111', 1: '010110010010111', 2: '110001010100111', 3: '110001010001110',
+    4: '101101111001001', 5: '111100110001110', 6: '011100111101111', 7: '111001010010010', 8: '111101111101111',
+    9: '111101111001110', $: '011110010011110', '-': '000000111000000', '.': '000000000000010', ',': '000000000010100',
+    ':': '000010000010000', '+': '000010111010000', '&': '010101010101011', '>': '100010001010100', '/': '001001010100100',
+  };
+  const COLS = 244, ROWS = 121, X0 = 6, W = 232, LID = 116, PITCH = 0.75, STEP = 10, TY = 19, TX = X0 + 11;
+  const BODY = 'abcdefghijklmnopqrstuvwxyz0123456789{}[]()<>/=+*&%$#@!?;:';
+  const INK = '#@%&$8XWMB0KR';
+  const tone = new Int8Array(COLS * ROWS).fill(-1), line = new Int8Array(COLS * ROWS).fill(-1), glyph = new Array(COLS * ROWS);
+  let seed = 20261115;
+  const rand = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
+  const pick = (pool) => pool[Math.floor(rand() * pool.length)];
+  const set = (x, y, t, pool) => { const i = y * COLS + x; tone[i] = t; glyph[i] = pick(pool); return i; };
+  const body = (x, y, w, h, lift = 0) => {
+    for (let yy = y; yy < y + h; yy++) for (let xx = x; xx < x + w; xx++) {
+      const light = 0.55 * rand() + 0.45 * (1 - xx / COLS) + lift;
+      set(xx, yy, light > 0.78 ? 2 : light > 0.5 ? 1 : 0, BODY);
+    }
+  };
+  const write = (text, row, tones) => [...text].forEach((c, n) => {
+    const bits = FONT[c];
+    if (bits) [...bits].forEach((b, k) => { if (b === '1') line[set(TX + n * 4 + (k % 3), TY + row * STEP + Math.floor(k / 3), tones(n), INK)] = row; });
+  });
+
+  body(X0, 0, W, 4, 0.1); body(X0, 4, 5, LID - 9); body(X0 + W - 5, 4, 5, LID - 9); body(X0, LID - 5, W, 5);
+  for (const [x, y] of [[0, 0], [1, 0], [0, 1]]) { tone[y * COLS + X0 + x] = -1; tone[y * COLS + X0 + W - 1 - x] = -1; }
+  body(COLS / 2 - 16, 4, 32, 5, -0.2);
+  set(COLS / 2 - 1, 1, 3, 'o'); set(COLS / 2, 1, 3, 'o');
+  [7, 8, 9].forEach((t, k) => { for (let d = 0; d < 4; d++) set(X0 + 11 + k * 5 + (d % 2), 8 + Math.floor(d / 2), t, INK); });
+  for (let x = X0 + 5; x < X0 + W - 5; x++) set(x, 14, 0, '-');
+
+  const shown = [['$ TAIL -F /VAR/LOG/BEAN.LOG', () => 3], ...LOG.map(([w, l, m]) => [`${w.toUpperCase().padEnd(4)} ${m.toUpperCase()}`, (n) => (n < 4 ? 3 : l === 'OK' ? 5 : 4)])];
+  shown.forEach(([text, tones], row) => write(text, row, tones));
+  const cursor = [];
+  for (let k = 0; k < 15; k++) {
+    const x = TX + (shown[shown.length - 1][0].length + 1) * 4 + (k % 3), y = TY + (shown.length - 1) * STEP + Math.floor(k / 3);
+    line[set(x, y, 4, INK)] = shown.length; cursor.push(y * COLS + x);
+  }
+
+  body(0, LID, COLS, 3, 0.1); body(2, LID + 3, COLS - 4, 1, -0.2); body(6, LID + 4, COLS - 12, 1, -0.4);
+  for (let x = COLS / 2 - 19; x < COLS / 2 + 19; x++) tone[LID * COLS + x] = -1;
+
+  const mac = document.getElementById('mac'), mx = mac.getContext('2d');
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  let cw = 0, rp = 0, t0 = performance.now(), ticks = 0;
+  const frozen = new URLSearchParams(location.search).get('t');
+  const OPEN_AT = 0.35, OPEN_FOR = 1.3, LINE_EVERY = 0.16, DONE = OPEN_AT + OPEN_FOR + LINE_EVERY * 12;
+
+  function size() {
+    const w = mac.clientWidth, dpr = Math.min(devicePixelRatio || 1, 3);
+    if (!w) return;
+    cw = w / COLS;
+    mx.font = `10px ${css('--font')}`;
+    const f = cw / (mx.measureText('M').width / 10);
+    rp = f * PITCH;
+    const h = Math.ceil(ROWS * rp);
+    mac.style.height = `${h}px`; mac.width = Math.round(w * dpr); mac.height = Math.round(h * dpr);
+    mx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    mx.font = `${f}px ${css('--font')}`; mx.textBaseline = 'top';
+    paint();
+  }
+
+  function paint() {
+    if (!cw) return;
+    const t = frozen !== null ? Number(frozen) : still ? DONE : (performance.now() - t0) / 1000, blink = !still && Math.floor(t / 0.55) % 2 === 1;
+    // The lid opens from flat on the base; then the log tails in, one line at a time.
+    const p = Math.min(1, Math.max(0, (t - OPEN_AT) / OPEN_FOR)), lid = Math.max(2, Math.round((1 - (1 - p) ** 3) * LID)), top = LID - lid;
+    const lit = Math.floor((t - OPEN_AT - OPEN_FOR - 0.15) / LINE_EVERY);
+    const pal = ['--fill', '--frame', '--t-msg', '--t-dim', '--t-msg', '--t-ok', '--t-info'].map(css).concat(['#d9564b', '#c99a2e', '#3f9a55']);
+    const hide = new Set(blink ? cursor : []);
+    mx.clearRect(0, 0, mac.width, mac.height);
+    mx.fillStyle = css('--wall');
+    mx.fillRect(X0 * cw, top * rp, W * cw, lid * rp); mx.fillRect(0, LID * rp, COLS * cw, (ROWS - LID) * rp);
+    pal.forEach((color, k) => {
+      mx.fillStyle = color;
+      for (let y = top; y < ROWS; y++) {
+        const src = y >= LID ? y : Math.min(LID - 1, Math.floor(((y - top) * LID) / lid));
+        let row = '', end = 0;
+        for (let x = 0, i = src * COLS; x < COLS; x++, i++) {
+          if (tone[i] === k && (line[i] < 0 || line[i] <= lit) && !hide.has(i)) { row += glyph[i]; end = row.length; } else row += ' ';
+        }
+        if (end) mx.fillText(row.slice(0, end), 0, y * rp);
+      }
+    });
+  }
+
+  function loop() {
+    if (document.hidden) return;
+    const intro = (performance.now() - t0) / 1000 < DONE;
+    if (!intro && ++ticks % 4) return;
+    if (!intro) for (let n = 0; n < 260; n++) {
+      const i = Math.floor(Math.random() * tone.length), pool = tone[i] < 3 ? BODY : INK;
+      if (tone[i] >= 0 && tone[i] < 7 && glyph[i] !== '-' && glyph[i] !== 'o') glyph[i] = pool[Math.floor(Math.random() * pool.length)];
+    }
+    paint();
+  }
+
+  addEventListener('resize', size);
+  document.querySelectorAll('.pick button').forEach((b) => b.addEventListener('click', () => { t0 = performance.now(); setTimeout(paint, 0); }));
+  size();
+  if (!still) setInterval(loop, 33);
+
+  // Narrow: one terminal frame at reading size.
+  const C = Math.ceil(Math.max(...lines.map(len)) / 2) * 2 + 2;
+  const row = (t) => `<span class="row">${t}</span>`;
+  const term = document.getElementById('term');
+  const title = 'bean -- tail';
+  const gap = C - 7 - title.length, lead = Math.floor(gap / 2);
+  term.style.setProperty('--cols', C + 4);
+  term.innerHTML = [
+    row(`.${rep('-', C + 2)}.`),
+    row(`|  <span class="r">o</span> <span class="y">o</span> <span class="g">o</span>${rep(' ', lead)}<span class="dim">${title}</span>${rep(' ', gap - lead)}  |`),
+    row(`|${rep('-', C + 2)}|`),
+    ...lines.map((l) => row(`|  ${spans(l)}${rep(' ', C - 1 - len(l))} |`)),
+    row(`'${rep('-', C + 2)}'`),
+  ].join('\n');
+})();
+(() => {
+  const cv = document.getElementById('ascii');
+  const ctx = cv.getContext('2d');
+  const root = document.documentElement;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const TAU = Math.PI * 2;
+  const FS = 13;
+  const PAL = {
+    field: ['', 'rgba(28,32,36,.07)', 'rgba(28,32,36,.11)', 'rgba(28,32,36,.16)', 'rgba(31,78,121,.26)'],
+    night: ['', '#27323e', '#4d5d6e', '#93a5b8', '#e9f0f7', '#2a6539', '#49965a', '#96d6a0', '#a38330', '#f5d15c', '#dc5a4e', '#7b5a3c', '#fff4b8'],
+  };
+  const WORDS = 'builditshipit';
+
+  let mode = 'field', skip = 0, t0 = performance.now(), raf = 0, last = 0;
+  let cw, ch, cols, rows, chr, col, zb, stars, tree;
+
+  const rng = (a) => () => {
+    a |= 0; a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+  const cone = (y) => 0.035 + 0.37 * y;
+  const tiers = (y) => cone(y) * (0.7 + 0.3 * ((y * 5) % 1));
+
+  function seed() {
+    const r = rng(11);
+    stars = Array.from({ length: Math.floor((cols * rows) / 46) }, () => ({
+      x: r() * cols, y: r() * rows, ph: r() * TAU, sp: 0.4 + r() * 1.6, m: Math.pow(r(), 1.8),
+    }));
+    const q = rng(7);
+    const leaves = [], lights = [], balls = [];
+    for (let i = 0; i < 2600; i++) {
+      const y = Math.pow(q(), 0.75), a = q() * TAU, rad = tiers(y) * (0.3 + 0.7 * Math.sqrt(q()));
+      leaves.push({ x: Math.cos(a) * rad, y, z: Math.sin(a) * rad, c: WORDS[i % WORDS.length] });
+    }
+    for (let i = 0; i < 170; i++) {
+      const f = i / 170, y = 0.05 + 0.93 * f, a = f * TAU * 6.5, rad = cone(y) * 0.96;
+      lights.push({ x: Math.cos(a) * rad, y, z: Math.sin(a) * rad });
+    }
+    for (let i = 0; i < 18; i++) {
+      const y = 0.2 + 0.76 * q(), a = q() * TAU, rad = cone(y) * 0.9;
+      balls.push({ x: Math.cos(a) * rad, y, z: Math.sin(a) * rad });
+    }
+    tree = { leaves, lights, balls };
+  }
+
+  function resize() {
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    cv.width = innerWidth * dpr; cv.height = innerHeight * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.font = `${FS}px ${getComputedStyle(root).getPropertyValue('--font')}`;
+    ctx.textBaseline = 'top';
+    cw = ctx.measureText('M').width; ch = Math.round(FS * 1.45);
+    cols = Math.ceil(innerWidth / cw); rows = Math.ceil(innerHeight / ch);
+    chr = new Array(cols * rows); col = new Uint8Array(cols * rows); zb = new Float32Array(cols * rows);
+    seed();
+    draw(now());
+  }
+
+  function put(x, y, c, k, z) {
+    if (x < 0 || y < 0 || x >= cols || y >= rows) return;
+    const i = y * cols + x;
+    if (z < zb[i]) return;
+    zb[i] = z; chr[i] = c; col[i] = k;
+  }
+
+  function field(t) {
+    const R = '..::;+*#';
+    for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+      const v = (Math.sin(x * 0.045 + t * 0.21) + Math.sin(y * 0.11 - t * 0.17) + Math.sin(x * 0.03 + y * 0.07 + t * 0.13)
+        + Math.sin(Math.hypot(x - cols * 0.7, (y - rows * 0.4) * 2.1) * 0.09 - t * 0.25)) / 8 + 0.5;
+      if (v < 0.5) continue;
+      const m = Math.min(1, Math.max(0, (x / cols - 0.2) / 0.5));
+      const u = ((v - 0.5) / 0.5) * (0.3 + 0.7 * m * m * (3 - 2 * m));
+      put(x, y, R[Math.min(R.length - 1, Math.floor(u * R.length))], u > 0.82 ? 4 : u > 0.55 ? 3 : u > 0.28 ? 2 : 1, 0);
+    }
+  }
+
+  function sky(t) {
+    for (const s of stars) {
+      const b = s.m * (0.55 + 0.45 * Math.sin(t * s.sp + s.ph));
+      const x = Math.floor((s.x + t * 0.12 * (0.3 + s.m)) % cols);
+      put(x, Math.floor(s.y), b > 0.72 ? '*' : b > 0.5 ? '+' : '.', b > 0.7 ? 4 : b > 0.38 ? 3 : b > 0.14 ? 2 : 1, -9e8);
+    }
+  }
+
+  function ground(t, cx, top, spread) {
+    for (let r = top; r < rows; r++) {
+      const d = (r - top + 1) / (rows - top), half = Math.floor(cols * (spread + 0.8 * Math.pow(d, 0.6)));
+      const shift = Math.floor(t * 1.4 * (0.4 + d));
+      for (let x = cx - half; x <= cx + half; x++) {
+        if ((((x - cx) * 3 + r * 5 + shift) % 7 + 7) % 7 < 4) put(x, r, d > 0.45 ? '=' : '-', d > 0.6 ? 2 : 1, -5e8);
+      }
+    }
+  }
+
+  function letterTree(t) {
+    const cx = Math.round(cols * 0.82);
+    const top = Math.round(rows * 0.6), hc = rows * 0.33, sx = (hc * ch) / cw;
+    const ang = t * 0.3, ca = Math.cos(ang), sa = Math.sin(ang);
+    const at = (p) => [Math.round(cx + (p.x * ca + p.z * sa) * sx), Math.round(top + p.y * hc), p.z * ca - p.x * sa];
+
+    ground(t, cx, Math.round(top + hc * 0.72), 0.04);
+
+    const nLeaf = Math.min(tree.leaves.length, Math.floor((t / 4.5) * tree.leaves.length));
+    for (let i = 0; i < nLeaf; i++) {
+      const p = tree.leaves[i], [x, y, z] = at(p);
+      put(x, y, p.c, z > 0.06 ? 7 : z > -0.06 ? 6 : 5, z);
+    }
+    const nLight = Math.max(0, Math.min(tree.lights.length, Math.floor(((t - 4.5) / 1.5) * tree.lights.length)));
+    for (let i = 0; i < nLight; i++) {
+      const [x, y, z] = at(tree.lights[i]), on = Math.sin(t * 4 + i * 1.7) > 0;
+      put(x, y, on ? '*' : 'o', on ? 9 : 8, z + 0.02);
+    }
+    const nBall = Math.max(0, Math.min(tree.balls.length, Math.floor((t - 6) * tree.balls.length)));
+    for (let i = 0; i < nBall; i++) {
+      const [x, y, z] = at(tree.balls[i]);
+      if (z > 0) { put(x, y, '@', 10, z + 0.03); put(x + 1, y, '@', 10, z + 0.03); }
+    }
+    for (let i = -1; i <= 1; i++) for (let j = 0; j < 2; j++) put(cx + i, Math.round(top + hc) + j, '#', 11, 1);
+    if (t > 7.2) {
+      const tip = ['  \\|/  ', '--=' + (Math.floor(t * 1.6) % 2 ? '*' : '+') + '=--', '  /|\\  '];
+      tip.forEach((row, j) => [...row].forEach((c, i) => { if (c !== ' ') put(cx - 3 + i, top - 2 + j, c, c === '*' || c === '+' ? 12 : 9, 2); }));
+    }
+    const deg = (((ang * 180) / Math.PI) % 360).toFixed(1).padStart(5, '0');
+    [...` rotation ${deg}   letters ${nLeaf}   lights ${nLight} `].forEach((c, i) => put(1 + i, rows - 2, c, c === ' ' ? 0 : 2, 3));
+  }
+
+  function draw(t) {
+    col.fill(0); zb.fill(-1e9);
+    if (mode === 'field') field(t);
+    else { sky(t); if (mode === 'tree' && innerWidth >= 860) letterTree(t); else ground(t, Math.round(cols / 2), Math.round(rows * 0.82), 1); }
+
+    const pal = PAL[mode === 'field' ? 'field' : 'night'];
+    ctx.clearRect(0, 0, innerWidth, innerHeight);
+    for (let k = 1; k < pal.length; k++) {
+      ctx.fillStyle = pal[k];
+      for (let r = 0; r < rows; r++) {
+        let s = '', n = 0;
+        for (let x = 0, o = r * cols; x < cols; x++) { if (col[o + x] === k) { s += chr[o + x]; n = s.length; } else s += ' '; }
+        if (n) ctx.fillText(s.slice(0, n), 0, r * ch + (ch - FS) / 2);
+      }
+    }
+  }
+
+  const now = () => (reduce ? 100 : (performance.now() - t0) / 1000 + skip);
+
+  function frame(ts) {
+    raf = requestAnimationFrame(frame);
+    if (ts - last < 1000 / (mode === 'field' ? 10 : 18)) return;
+    last = ts;
+    draw(now());
+  }
+
+  function setMode(m) {
+    mode = m;
+    root.classList.toggle('night', m !== 'field');
+    document.querySelectorAll('.pick button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === m)));
+    t0 = performance.now();
+    draw(now());
+  }
+
+  const hash = location.hash.slice(1).split(',');
+  if (hash.includes('full')) skip = 100;
+  document.querySelectorAll('.pick button').forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode)));
+  addEventListener('resize', resize);
+  document.addEventListener('visibilitychange', () => {
+    cancelAnimationFrame(raf);
+    if (!document.hidden && !reduce) raf = requestAnimationFrame(frame);
+  });
+  resize();
+  setMode(['field', 'night', 'tree'].find((m) => hash.includes(m)) || 'field');
+  if (!reduce) raf = requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
