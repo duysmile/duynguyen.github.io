@@ -3,7 +3,7 @@ tags: [change, duynguyen-github-io]
 status: in-progress
 size: small
 mode: yolo
-gate: "Yolo: slice 1/2. Next stop: final review."
+gate: "GF: approve the build, or comment in the viewer."
 created: 2026-11-15
 repo: github.com/duysmile/duynguyen.github.io
 branch: feat/ascii-background

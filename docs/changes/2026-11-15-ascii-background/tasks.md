@@ -48,7 +48,8 @@ frameAt(t):
   cursorOn = blinks after the last line
 
 buildMacbook(log):
-  a line longer than the screen, or more lines than fit → RangeError
+  a line longer than the screen → RangeError
+  more lines than fit → show the tail of the log
   fill bezel, notch, base with mixed characters, three tones
   write each log line as 3x5-cell letters, upper case
 ```
@@ -56,7 +57,7 @@ buildMacbook(log):
 ```ts
 type Grid = { cols: number; rows: number; tone: Int8Array; glyph: string[] }; // tone -1 = empty
 type Sky = { grid: Grid; stars: Star[] };
-type Macbook = Grid & { lid: number; line: Int8Array; cursor: number[]; lines: number };
+type Macbook = Grid & { lid: number; line: Int8Array; lines: number; screen: { left: number; right: number; top: number; bottom: number } };
 type Frame = { lidRows: number; litLines: number; cursorOn: boolean };
 type Mode = 'off' | 'still' | 'paused' | 'animate';
 
@@ -67,25 +68,27 @@ function unsupported(text: string): string[]
 function buildMacbook(log: LogLine[], seed?: number): Macbook
 function frameAt(t: number, lid: number, lines: number): Frame
 function sourceRow(y: number, lid: number, lidRows: number): number
+function isShown(mac: Macbook, frame: Frame, cell: number): boolean
+function shimmer(mac: Macbook, rand: Rand, count: number): void
 function rowText(grid: Grid, row: number, tone: number, shown?: (cell: number) => boolean): string
 ```
 
 | Error | Raised in | Handled in | User sees |
 |---|---|---|---|
 | no 2D context, no script | `drawMode` → `off` | component script | flat wall; log in the text terminal frame |
-| log line does not fit the screen | `buildMacbook` RangeError | not handled: the test fails, the build stops | nothing ships |
+| log line over 50 characters | `buildMacbook` RangeError | not handled: `Laptop.astro` calls it at build time, the build stops | nothing ships |
 | character with no 3x5 glyph | `unsupported` in a test | not handled: the test fails | nothing ships |
 
 ## Slices
 
-- [ ] 1. Night sky layer on each page, dark color tokens
+- [x] 1. Night sky layer on each page, dark color tokens
   - Why first: it touches each page; contrast and print must hold before the laptop work.
   - Files: `src/lib/ascii/{rng,grid,sky,motion,paint}.ts`, `src/components/AsciiSky.astro`, `src/layouts/Base.astro`, `src/styles/global.css`, `src/components/Mug.astro`, `src/pages/cv.astro`, `src/pages/notes/[slug].astro`
   - Repos: single repo
   - Verify: `npx vitest run && npx astro check && npx astro build` → all pass; screenshots of home, notes, a note, CV, CV print
   - Covers: R1, R2, R3, R4, R5
   - Tests: T1, T2, T3, T4, T5, T6, T7, T15, T16, T18
-- [ ] 2. MacBook built from characters; the lid opens, the log tails in
+- [x] 2. MacBook built from characters; the lid opens, the log tails in
   - Files: `src/lib/ascii/{font,macbook}.ts`, `src/components/Laptop.astro`
   - Repos: single repo
   - Verify: `npx vitest run && npx astro check && npx astro build` → all pass; screenshots at t = 0.2, 0.6, 2.3, end; 375px
@@ -98,4 +101,6 @@ function rowText(grid: Grid, row: number, tone: number, shown?: (cell: number) =
 - 3x5 bitmap font — `src/lib/ascii/font.ts`
 
 ## Follow-ups
+- Lighthouse run on the deployed preview (outcome: performance 95 or more).
+- Footer text sits on the horizon lines; dim the horizon there if it reads badly.
 - Letter-tree scene (variant C) as a December extra.
