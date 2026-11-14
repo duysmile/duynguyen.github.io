@@ -1,13 +1,16 @@
 ---
 import '../styles/global.css';
+import AsciiSky from '../components/AsciiSky.astro';
 
 interface Props {
   title: string;
   description: string;
   active?: 'projects' | 'notes' | 'cv';
+  /** Long-read pages: the sky does not move. */
+  stillSky?: boolean;
 }
 
-const { title, description, active } = Astro.props;
+const { title, description, active, stillSky } = Astro.props;
 const nav = [
   { key: 'projects', href: '/projects', label: 'projects' },
   { key: 'notes', href: '/notes', label: 'notes' },
@@ -26,17 +29,18 @@ const fullTitle = title === 'home' ? 'Nguyen Duy (Bean) — backend engineer' : 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta name="theme-color" content="#e3e7eb" />
+    <meta name="theme-color" content="#090d12" />
   </head>
   <body>
     <!--
-      THESIS: a calm backend engineer at his desk; the work speaks, not the decoration. Refuses the loud dev-portfolio hero.
-      OWN-WORLD: cool grey wall, white paper, dark terminal screen; one face, JetBrains Mono; one muted link blue.
+      THESIS: a calm backend engineer at his desk at night; the work speaks, not the decoration. Refuses the loud dev-portfolio hero.
+      OWN-WORLD: night sky drawn in characters, dark paper, a MacBook built from characters; one face, JetBrains Mono; one muted link blue.
       STORY: hiring manager sees what Bean owns end to end, opens the CV; engineers read the notes.
-      FIRST VIEWPORT: intro left (headline, two lines, two actions); laptop on a desk right, tailing a career log.
+      FIRST VIEWPORT: intro left (headline, two lines); a MacBook built from characters right, its lid opens and it tails a career log.
       FORM: The Desk (round 2, user pick, laptop variant); seed 01e7ba5d.
       FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
     -->
+    <AsciiSky still={stillSky} />
     <a class="skip" href="#content">Skip to content</a>
     <header class="site-header wrap">
       <a class="brand" href="/">nguyen.duy <span>/ bean</span></a>

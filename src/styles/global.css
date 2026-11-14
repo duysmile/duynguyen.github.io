@@ -2,18 +2,19 @@
 @import '@fontsource-variable/jetbrains-mono/wght-italic.css';
 
 :root {
-  color-scheme: light;
-  --wall: #e3e7eb;
-  --paper: #ffffff;
-  --paper-2: #f7f8f9;
-  --ink: #1c2024;
-  --ink-2: #2b333b;
-  --ink-3: #3b444d;
-  --muted: #55606b;
-  --line: #cdd3d9;
-  --line-2: #e1e5e9;
-  --link: #1f4e79;
-  --link-hover: #123150;
+  color-scheme: dark;
+  --wall: #090d12;
+  --paper: #111820;
+  --paper-2: #0e141a;
+  --ink: #e8edf2;
+  --ink-2: #d3dae1;
+  --ink-3: #bcc6d0;
+  --muted: #8a97a4;
+  --line: #222c36;
+  --line-2: #1a222a;
+  --link: #8db4e2;
+  --link-hover: #b5d0ee;
+  --select: #26405c;
   --screen: #0e1317;
   --screen-ink: #c9d4cc;
   --screen-dim: #8593a0;
@@ -44,7 +45,7 @@ a { color: var(--link); text-underline-offset: 4px; text-decoration-thickness: 1
 a:hover { color: var(--link-hover); }
 
 :focus-visible { outline: 2px solid var(--link); outline-offset: 3px; border-radius: 2px; }
-::selection { background: #c9d9ea; color: var(--ink); }
+::selection { background: var(--select); color: var(--ink); }
 
 h1, h2, h3 { line-height: 1.25; text-wrap: balance; margin: 0; }
 p { margin: 0; text-wrap: pretty; }
@@ -67,7 +68,7 @@ p { margin: 0; text-wrap: pretty; }
   padding: 0 20px;
   border-radius: var(--radius);
   background: var(--ink);
-  color: #f2f4f6;
+  color: var(--wall);
   font: inherit;
   font-weight: 500;
   text-decoration: none;
@@ -75,10 +76,28 @@ p { margin: 0; text-wrap: pretty; }
   cursor: pointer;
   transition: background-color 160ms ease-out;
 }
-.btn:hover { background: #33393f; color: #f2f4f6; }
+.btn:hover { background: var(--ink-3); color: var(--wall); }
 
 .skip { position: absolute; left: -9999px; }
 .skip:focus { left: 16px; top: 16px; background: var(--paper); padding: 8px 12px; z-index: 10; }
+
+/* Paper is light: print uses the day palette. */
+@media print {
+  :root {
+    color-scheme: light;
+    --wall: #ffffff;
+    --paper: #ffffff;
+    --paper-2: #f7f8f9;
+    --ink: #1c2024;
+    --ink-2: #2b333b;
+    --ink-3: #3b444d;
+    --muted: #55606b;
+    --line: #cdd3d9;
+    --line-2: #e1e5e9;
+    --link: #1f4e79;
+    --link-hover: #123150;
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }

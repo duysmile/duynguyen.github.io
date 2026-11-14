@@ -29,6 +29,7 @@ Personal site of Nguyen Duy ("Bean"), full-stack engineer, 7+ years. It makes ye
 - Voice: warm, personal, first person, plain English.
 - Photo and football: not to be used.
 - Character (user, 2026-10-29): calm, humble, conservative. A backend engineer at his computer. No loud colors, gimmicks, or self-hype.
+- Look (user, 2026-11-15): night. A sky drawn in characters behind every page; on the home page a MacBook built from characters opens and tails the career log. This replaces the grey wall and the CSS laptop.
 
 ## Evidence on Hand
 - Facts: `docs/changes/2026-10-29-portfolio-rebuild/profile.md` (merged CV 2026 + CV 2023 + Xendit notes). Do not add numbers or claims beyond it.

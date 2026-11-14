@@ -1,0 +1,89 @@
+---
+interface Props {
+  /** One still frame: for pages where people read long text. */
+  still?: boolean;
+}
+
+const { still = false } = Astro.props;
+---
+<canvas class="sky" aria-hidden="true" data-still={still ? '' : undefined}></canvas>
+
+<script>
+  import { drawMode } from '../lib/ascii/motion';
+  import { paintGrid, setFont } from '../lib/ascii/paint';
+  import { makeSky, skyFrame, SKY_TONES, type Sky } from '../lib/ascii/sky';
+
+  const FONT_PX = 13;
+  const ROW_PX = 19;
+  const FRAME_MS = 1000 / 12;
+
+  const canvas = document.querySelector<HTMLCanvasElement>('canvas.sky');
+  const ctx = canvas?.getContext('2d') ?? null;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const family = getComputedStyle(document.documentElement).getPropertyValue('--font');
+  const started = performance.now();
+  let sky: Sky | null = null;
+  let width = 0;
+  let height = 0;
+  let last = 0;
+  let raf = 0;
+
+  const mode = () =>
+    drawMode({ canvas: !!ctx, reduced: reduced.matches, still: canvas?.dataset.still !== undefined, hidden: document.hidden });
+
+  function draw() {
+    if (!ctx || !sky) return;
+    ctx.clearRect(0, 0, width, height);
+    paintGrid(ctx, skyFrame(sky, (performance.now() - started) / 1000), SKY_TONES, ROW_PX);
+  }
+
+  function resize() {
+    if (!canvas || !ctx) return;
+    // The canvas is 100lvh tall, so a phone's URL bar sliding away does not land here as a new size.
+    if (canvas.clientWidth === width && canvas.clientHeight === height) return;
+    width = canvas.clientWidth;
+    height = canvas.clientHeight;
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    sky = makeSky(Math.ceil(width / setFont(ctx, family, FONT_PX)), Math.ceil(height / ROW_PX));
+    draw();
+  }
+
+  function tick(now: number) {
+    raf = 0;
+    if (mode() !== 'animate') return;
+    raf = requestAnimationFrame(tick);
+    if (now - last < FRAME_MS) return;
+    last = now;
+    draw();
+  }
+
+  function run() {
+    if (!raf && mode() === 'animate') raf = requestAnimationFrame(tick);
+  }
+
+  if (mode() !== 'off') {
+    resize();
+    addEventListener('resize', resize);
+    document.addEventListener('visibilitychange', run);
+    reduced.addEventListener('change', run);
+    run();
+  }
+</script>
+
+<style>
+  .sky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100lvh;
+    z-index: -1;
+    pointer-events: none;
+  }
+  @media print {
+    .sky { display: none; }
+  }
+</style>
